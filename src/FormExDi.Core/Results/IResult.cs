@@ -3,9 +3,7 @@
     /// <summary>
     /// Results a message with object or null if has error.
     /// </summary>
-    /// <typeparam name="TResult"></typeparam>
-    public interface IResult<TResult>
-        where TResult : class
+    public interface IResult
     {
         /// <summary>
         /// True : contains error, false : Don't contains.
@@ -26,10 +24,5 @@
         /// Messages complement, normally this is used when has error
         /// </summary>        
         IEnumerable<string> Messages { get; }
-
-        /// <summary>
-        /// Result object if no has error, if has error, is null.
-        /// </summary>
-        TResult? Result { get; }
     }
 }

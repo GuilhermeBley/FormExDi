@@ -3,10 +3,10 @@
 namespace FormExDi.Core.Results
 {
     /// <summary>
-    /// Internal implementation to <see cref="IResult{TResult}"/>
+    /// Internal implementation to <see cref="IResultGeneric{TResult}"/>
     /// </summary>
     /// <typeparam name="TResult">Validation type</typeparam>
-    internal class ResultGeneric<TResult> : IResult<TResult>
+    internal class ResultGeneric<TResult> : IResultGeneric<TResult>
         where TResult : class
     {
         public const char SepJoin = '\n';
