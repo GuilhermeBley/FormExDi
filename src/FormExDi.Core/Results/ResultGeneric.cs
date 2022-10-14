@@ -6,7 +6,7 @@ namespace FormExDi.Core.Results
     /// Internal implementation to <see cref="IResultGeneric{TResult}"/>
     /// </summary>
     /// <typeparam name="TResult">Validation type</typeparam>
-    internal class ResultGeneric<TResult> : IResultGeneric<TResult>
+    public class ResultGeneric<TResult> : IResultGeneric<TResult>
         where TResult : class
     {
         public const char SepJoin = '\n';
@@ -51,7 +51,7 @@ namespace FormExDi.Core.Results
         /// <inheritdoc cref="_messages" path="*"/>
         public IEnumerable<string> Messages => _messages;
 
-        private ResultGeneric(int code, TResult? result = null, params string[] messages)
+        protected internal ResultGeneric(int code, TResult? result = null, params string[] messages)
         {
             _hasError = result is null;
             _code = code;
@@ -59,7 +59,7 @@ namespace FormExDi.Core.Results
             _result = result;
         }
 
-        private ResultGeneric(HttpStatusCode code, TResult? result = null, params string[] messages) :
+        protected internal ResultGeneric(HttpStatusCode code, TResult? result = null, params string[] messages) :
             this((int)code, result, messages)
         {
         }
@@ -86,6 +86,80 @@ namespace FormExDi.Core.Results
         public static ResultGeneric<TResult> Bad(params string[] messages)
         {
             return new ResultGeneric<TResult>(HttpStatusCode.BadRequest, null, messages);
+        }
+
+        /// <summary>
+        /// Return a new Result with a bad message and the object to return null
+        /// </summary>
+        /// <param name="messages">complements messages of the error</param>
+        /// <returns>result with nullable result</returns>
+        public static ResultGeneric<TResult> Conflict()
+        {
+            return new ResultGeneric<TResult>(HttpStatusCode.Conflict, null, "Already exists");
+        }
+
+        /// <summary>
+        /// Return a new Result with a not found message
+        /// </summary>
+        /// <returns>result with nullable result</returns>
+        public static ResultGeneric<TResult> NotFound()
+        {
+            return new ResultGeneric<TResult>(HttpStatusCode.NotFound, null, "Not Found");
+        }
+
+        /// <summary>
+        /// Return a new Result with a bad message and the object to return null
+        /// </summary>
+        /// <param name="messages">complements messages of the error</param>
+        /// <returns>result with nullable result</returns>
+        public static ResultGeneric<TResult> Bad(IEnumerable<string> messages)
+        {
+            return new ResultGeneric<TResult>(HttpStatusCode.BadRequest, null, messages.ToArray());
+        }
+
+        /// <inheritdoc cref="IResultGeneric{TResult}.GetResult" path="*"/>
+        public TResult GetResult()
+            => Result ?? throw new ArgumentNullException(typeof(TResult).Name);
+    }
+
+
+    public class ResultGeneric : ResultGeneric<dynamic>
+    {
+        protected internal ResultGeneric(int code, object? result = null, params string[] messages) : base(code, result, messages)
+        {
+        }
+
+        protected internal ResultGeneric(HttpStatusCode code, object? result = null, params string[] messages) : base(code, result, messages)
+        {
+        }
+
+        /// <summary>
+        /// Return a new Result with a bad message and the object to return null
+        /// </summary>
+        /// <param name="messages">complements messages of the error</param>
+        /// <returns>result with nullable result</returns>
+        public static ResultGeneric Conflict()
+        {
+            return new ResultGeneric(HttpStatusCode.Conflict, null, "Already exists");
+        }
+
+        /// <summary>
+        /// Return a new Result with a not found message
+        /// </summary>
+        /// <returns>result with nullable result</returns>
+        public static ResultGeneric<dynamic> NotFound()
+        {
+            return new ResultGeneric(HttpStatusCode.NotFound, null, "Not Found");
+        }
+
+        /// <summary>
+        /// Return a new Result with a bad message and the object to return null
+        /// </summary>
+        /// <param name="messages">complements messages of the error</param>
+        /// <returns>result with nullable result</returns>
+        public static ResultGeneric Bad(IEnumerable<string> messages)
+        {
+            return new ResultGeneric(HttpStatusCode.BadRequest, null, messages.ToArray());
         }
     }
 }
