@@ -87,7 +87,7 @@ public class VehicleService : IVehicleService
         return ResultGeneric.Ok(modelRemoved);
     }
 
-    public async Task<IResultGeneric<VehicleModel>> UpdateAsync(string renavam, VehicleModel vehicle)
+    public Task<IResultGeneric<VehicleModel>> UpdateAsync(string renavam, VehicleModel vehicle)
     {
         throw new NotImplementedException();
     }

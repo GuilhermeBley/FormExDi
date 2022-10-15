@@ -20,7 +20,7 @@ public class Infracao
         DtValidity = dtValidity;
     }
 
-    public IResultGeneric<Infracao> Create(string renavam, string ait, DateTime dtInfracao, string local, DateTime? dtValidity)
+    public static IResultGeneric<Infracao> Create(string renavam, string ait, DateTime dtInfracao, string local, DateTime? dtValidity)
     {
         if (Valid.IsRenavamBrl(renavam, out string? renavamOut))
             return ResultGeneric.Bad<Infracao>("Invalid Renavam.");
