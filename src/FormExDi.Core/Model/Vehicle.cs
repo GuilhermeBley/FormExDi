@@ -18,15 +18,15 @@ public class Vehicle
     public static IResultGeneric<Vehicle> Create(string renavam, string plate, string uf)
     {
         if (Valid.IsRenavamBrl(renavam, out string? renavamOut))
-            return ResultGeneric<Vehicle>.Bad("Invalid Renavam.");
+            return ResultGeneric.Bad<Vehicle>("Invalid Renavam.");
 
         if (Valid.IsPlateBrl(plate, out string? plateOut))
-            return ResultGeneric<Vehicle>.Bad("Invalid Plate.");
+            return ResultGeneric.Bad<Vehicle>("Invalid Plate.");
 
         if (Valid.IsPlateBrl(uf, out string? ufOut))
-            return ResultGeneric<Vehicle>.Bad("Invalid Uf.");
+            return ResultGeneric.Bad<Vehicle>("Invalid Uf.");
 
-        return ResultGeneric<Vehicle>.Ok(new Vehicle(renavamOut!, plateOut!, ufOut!));
+        return ResultGeneric.Ok(new Vehicle(renavamOut!, plateOut!, ufOut!));
     }
 }
 

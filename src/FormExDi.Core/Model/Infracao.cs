@@ -23,15 +23,15 @@ public class Infracao
     public IResultGeneric<Infracao> Create(string renavam, string ait, DateTime dtInfracao, string local, DateTime? dtValidity)
     {
         if (Valid.IsRenavamBrl(renavam, out string? renavamOut))
-            return ResultGeneric<Infracao>.Bad("Invalid Renavam.");
+            return ResultGeneric.Bad<Infracao>("Invalid Renavam.");
         if (dtInfracao.Equals(DateTime.MinValue) || dtValidity == DateTime.MinValue)
-            return ResultGeneric<Infracao>.Bad("Invalid Date or dates.");
+            return ResultGeneric.Bad<Infracao>("Invalid Date or dates.");
         if (string.IsNullOrWhiteSpace(local))
-            return ResultGeneric<Infracao>.Bad("Invalid Local");
+            return ResultGeneric.Bad<Infracao>("Invalid Local");
         ait = ait.Trim();
         if (string.IsNullOrWhiteSpace(ait) || ait.Length <= 3)
-            return ResultGeneric<Infracao>.Bad("Invalid Ait, he should be greater than 3 characters.");
-        return ResultGeneric<Infracao>.Ok(new Infracao(renavamOut!, ait, dtInfracao, local, dtValidity));
+            return ResultGeneric.Bad<Infracao>("Invalid Ait, he should be greater than 3 characters.");
+        return ResultGeneric.Ok(new Infracao(renavamOut!, ait, dtInfracao, local, dtValidity));
     }
 }
 

@@ -29,62 +29,52 @@ public class VehicleService : IVehicleService
             = Vehicle.Create(vehicle.Renavam, vehicle.Plate, vehicle.Uf);
 
         if (resultVehicle.HasError)
-            return ResultGeneric<VehicleModel>.Bad(resultVehicle.Messages);
+            return ResultGeneric.Bad<VehicleModel>(resultVehicle.Messages);
 
         VehicleModel modelAdded;
         var vehicleEntity = resultVehicle.GetResult();
         using (await _uow.BeginTransactionAsync())
         {
             if ((await _vehicleRepository.GetByIdAsync(vehicleEntity.Renavam)) is not null)
-                return ResultGeneric<VehicleModel>.Conflict();
+                return ResultGeneric.Conflict<VehicleModel>();
 
             modelAdded = await _vehicleRepository.AddAsync(vehicleEntity);
 
             await _uow.SaveChangesAsync();
         }
 
-        return ResultGeneric<VehicleModel>.Ok(modelAdded);
+        return ResultGeneric.Ok(modelAdded);
     }
 
     public async Task<IResultGeneric<VehicleModel>> DeleteAsync(string renavam)
     {
         if (!Valid.IsRenavamBrl(renavam, out string? renavamOut) || renavamOut is null)
-            return ResultGeneric<VehicleModel>.Bad("Invalid renavam.");
+            return ResultGeneric.Bad<VehicleModel>("Invalid renavam.");
 
         VehicleModel modelRemoved;
         using (await _uow.BeginTransactionAsync())
         {
             if ((await _vehicleRepository.GetByIdAsync(renavamOut)) is null)
-                return ResultGeneric.NotFound();
+                return ResultGeneric.NotFound<VehicleModel>();
 
             modelRemoved = await _vehicleRepository.DeleteAsync(renavamOut);
 
             await _uow.SaveChangesAsync();
         }
 
-        return ResultGeneric<VehicleModel>.Ok(modelRemoved);
+        return ResultGeneric.Ok(modelRemoved);
     }
 
     public async Task<IResultGeneric<IEnumerable<VehicleModel>>> GetAsync()
     {
-        if (!Valid.IsRenavamBrl(renavam, out string? renavamOut) || renavamOut is null)
-            return ResultGeneric<VehicleModel>.Bad("Invalid renavam.");
-
-        VehicleModel? modelRemoved;
-
         using (await _uow.OpenConnectionAsync())
-            modelRemoved = await _vehicleRepository.GetByIdAsync(renavamOut);
-
-        if (modelRemoved is null)
-            return ResultGeneric<VehicleModel>.NotFound();
-
-        return ResultGeneric<VehicleModel>.Ok(modelRemoved);
+            return ResultGeneric.Ok(await _vehicleRepository.GetAllAsync());
     }
 
     public async Task<IResultGeneric<VehicleModel>> GetByRenavamAsync(string renavam)
     {
         if (!Valid.IsRenavamBrl(renavam, out string? renavamOut) || renavamOut is null)
-            return ResultGeneric<VehicleModel>.Bad("Invalid renavam.");
+            return ResultGeneric.Bad<VehicleModel>("Invalid renavam.");
 
         VehicleModel? modelRemoved;
 
@@ -92,9 +82,9 @@ public class VehicleService : IVehicleService
             modelRemoved = await _vehicleRepository.GetByIdAsync(renavamOut);
         
         if (modelRemoved is null)
-            return ResultGeneric<VehicleModel>.NotFound();
+            return ResultGeneric.NotFound<VehicleModel>();
 
-        return ResultGeneric<VehicleModel>.Ok(modelRemoved);
+        return ResultGeneric.Ok(modelRemoved);
     }
 
     public async Task<IResultGeneric<VehicleModel>> UpdateAsync(string renavam, VehicleModel vehicle)
