@@ -16,10 +16,13 @@ public class DbSession : IUnitOfWork, IDbSession
     private DbConnection? _connection { get; set; }
     private DbTransaction? _transaction { get; set; }
     private Func<DbConnection> _createConnection { get; }
-    public Guid Identifier => _identifier;
+
+    public Guid IdSession => _identifier;
+    public Guid IdUoW => _identifier;
 
     public IDbConnection Connection => _connection ?? throw new ArgumentNullException(nameof(Connection));
     public IDbTransaction? Transaction => _transaction;
+
 
     public DbSession(IConfiguration configuration)
     {

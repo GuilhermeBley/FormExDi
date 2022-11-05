@@ -8,7 +8,7 @@ public interface IUnitOfWork : IDisposable
     /// <summary>
     /// Identifier of unit
     /// </summary>
-    Guid Identifier { get; }
+    Guid IdUoW { get; }
 
     /// <summary>
     /// Necessary to create and open a new connection
