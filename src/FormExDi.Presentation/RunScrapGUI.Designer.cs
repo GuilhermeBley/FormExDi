@@ -1,6 +1,6 @@
 ﻿namespace FormExDi.Presentation;
 
-partial class Form1
+partial class RunScrapGUI
 {
     /// <summary>
     ///  Required designer variable.

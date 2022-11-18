@@ -9,7 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="BlScraper.DependencyInjection" Version="6.0.4" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FormExDi.Application\FormExDi.Application.csproj" />
+    <ProjectReference Include="..\FormExDi.Infrastructure\FormExDi.Infrastructure.csproj" />
+    <ProjectReference Include="..\FormExDi.Scrap\FormExDi.Scrap.csproj" />
   </ItemGroup>
 
 </Project>
