@@ -11,12 +11,18 @@
   <ItemGroup>
 	<PackageReference Include="BlScraper.DependencyInjection" Version="6.0.4" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FormExDi.Application\FormExDi.Application.csproj" />
     <ProjectReference Include="..\FormExDi.Infrastructure\FormExDi.Infrastructure.csproj" />
     <ProjectReference Include="..\FormExDi.Scrap\FormExDi.Scrap.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+	<None Include="appsettings.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>
