@@ -1,5 +1,4 @@
 ﻿using FormExDi.Application.UoW;
-using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.Common;
@@ -9,9 +8,8 @@ namespace FormExDi.Infrastructure.UoW;
 /// <summary>
 /// Manage connections and transactions
 /// </summary>
-public class DbSession : IUnitOfWork, IDbSession
+public class MySqlDbSession : IUnitOfWork, IDbSession
 {
-    private const string ConnectionName = "Scrap";
     private Guid _identifier { get; } = Guid.NewGuid();
     private DbConnection? _connection { get; set; }
     private DbTransaction? _transaction { get; set; }
@@ -24,11 +22,11 @@ public class DbSession : IUnitOfWork, IDbSession
     public IDbTransaction? Transaction => _transaction;
 
 
-    public DbSession(IConfiguration configuration)
+    public MySqlDbSession(string connectionstring)
     {
         _createConnection = () =>
         {
-            return new MySqlConnection(configuration.GetConnectionString(ConnectionName));
+            return new MySqlConnection(connectionstring);
         };
     }
 
