@@ -11,16 +11,13 @@ public class InfracaoService : IInfracaoService
 {
     private readonly IUnitOfWork _uow;
     private readonly IInfracaoRepository _infracaoRepository;
-    private readonly IMapper _mapper;
 
     public InfracaoService(
         IUnitOfWork uow,
-        IInfracaoRepository infracaoRepository,
-        IMapper mapper)
+        IInfracaoRepository infracaoRepository)
     {
         _uow = uow;
         _infracaoRepository = infracaoRepository;
-        _mapper = mapper;
     }
 
     public async Task<IResultGeneric<InfracaoModel>> AddAsync(InfracaoModel infracao)

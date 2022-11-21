@@ -2,11 +2,11 @@
 using FormExDi.Application.Model;
 using FormExDi.Core.Model;
 
-namespace FormExDi.Application.Mappings
+namespace FormExDi.Infrastructure.Mappings
 {
-    public class DomainToAppProfile : Profile
+    public class InfrastructureProfile : Profile
     {
-        public DomainToAppProfile()
+        public InfrastructureProfile()
         {
             CreateMap<Vehicle, VehicleModel>();
             CreateMap<Infracao, InfracaoModel>();

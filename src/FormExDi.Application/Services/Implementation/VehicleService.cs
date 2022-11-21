@@ -11,16 +11,13 @@ public class VehicleService : IVehicleService
 {
     private readonly IUnitOfWork _uow;
     private readonly IVehicleRepository _vehicleRepository;
-    private readonly IMapper _mapper;
 
     public VehicleService(
         IUnitOfWork uow,
-        IVehicleRepository vehicleRepository,
-        IMapper mapper)
+        IVehicleRepository vehicleRepository)
     {
         _uow = uow;
         _vehicleRepository = vehicleRepository;
-        _mapper = mapper;
     }
 
     public async Task<IResultGeneric<VehicleModel>> AddAsync(VehicleModel vehicle)

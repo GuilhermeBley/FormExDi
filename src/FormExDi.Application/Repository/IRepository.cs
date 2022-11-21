@@ -11,8 +11,8 @@ public interface IRepository<TId, TEntity, TModel>
     where TModel : class
 {
     Task<TModel> AddAsync(TEntity entity);
-    Task<TModel> UpdateAsync(TId id, TEntity entity);
+    Task<TModel> UpdateAsync(TEntity entity);
     Task<TModel> DeleteAsync(TId id);
-    Task<TModel> GetByIdAsync(TId id);
+    Task<TModel?> GetByIdAsync(TId id);
     Task<IEnumerable<TModel>> GetAllAsync();
 }
