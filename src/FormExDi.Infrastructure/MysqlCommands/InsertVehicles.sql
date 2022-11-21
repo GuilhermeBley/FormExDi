@@ -1,0 +1,26 @@
+﻿USE vehicle;
+
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('123456789', 'ABC1234', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('70481373137', 'LNB3243', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('22536866717', 'MZS1837', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('62086051741', 'MOA5148', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('86476084099', 'MNX6924', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('96436327753', 'MMO2067', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('20334607331', 'NDK6176', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('88338925914', 'MTU5672', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('40655018491', 'NDK6456', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('34162617008', 'JPC2763', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('53958980935', 'JPS8914', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('60171106567', 'GNC0892', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('90232042301', 'MUY9325', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('67091081018', 'KLQ6860', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('65520545120', 'LWB7770', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('80159715340', 'MSU6250', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('89926211198', 'HOX8214', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('69205810109', 'KHT7043', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('10003214653', 'NEZ9035', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('51575394476', 'MLL1135', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('6677981812', 'HNW9217', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('83486215671', 'KCB5183', 'SP');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('2287300699', 'NBW9440', 'MT');
+INSERT INTO vehicle.vehicle (Renavam, Plate, Uf) VALUES ('41200590038', 'AFV6264', 'RJ');
