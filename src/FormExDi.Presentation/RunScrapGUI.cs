@@ -1,13 +1,17 @@
-using BlScraper.Model;
+using BlScraper.DependencyInjection.Builder;
 
 namespace FormExDi.Presentation;
 
 public partial class RunScrapGUI : Form
 {
-    public RunScrapGUI(IModelScraper model)
+    private readonly IScrapBuilder _builder;
+
+    public RunScrapGUI(IScrapBuilder scrapBuilder)
     {
-        if (model is null)
-            throw new ArgumentNullException(nameof(model));
+        if (scrapBuilder is null)
+            throw new ArgumentNullException(nameof(scrapBuilder));
+
+        _builder = scrapBuilder;
 
         InitializeComponent();
     }
