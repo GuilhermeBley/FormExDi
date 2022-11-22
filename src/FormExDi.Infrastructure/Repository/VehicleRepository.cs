@@ -43,11 +43,20 @@ namespace FormExDi.Infrastructure.Repository
 
         public async Task<VehicleModel?> GetByIdAsync(string id)
         {
-
             return
                 await _dbConnection.QueryFirstAsync<VehicleModel?>(
                     "SELECT Renavam, Plate, Uf FROM vehicle.vehicle WHERE Renavam = @Renavam;",
                     new { Renavam = id },
+                    _dbTransaction
+                );
+        }
+
+        public async Task<IEnumerable<VehicleModel>> GetByUf(string uf)
+        {
+            return
+                await _dbConnection.QueryAsync<VehicleModel>(
+                    "SELECT Renavam, Plate, Uf FROM vehicle.vehicle WHERE Uf = @Uf;",
+                    new { Uf = uf },
                     _dbTransaction
                 );
         }

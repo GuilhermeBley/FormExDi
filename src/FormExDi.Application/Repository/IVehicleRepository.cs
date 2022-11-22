@@ -5,5 +5,6 @@ namespace FormExDi.Application.Repository
 {
     public interface IVehicleRepository : IRepository<string, Vehicle, VehicleModel>
     {
+        Task<IEnumerable<VehicleModel>> GetByUf(string uf);
     }
 }

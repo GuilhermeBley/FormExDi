@@ -2,11 +2,6 @@
 using FormExDi.Application.Model;
 using FormExDi.Application.Repository;
 using FormExDi.Scrap.Args;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas;
 
@@ -23,9 +18,8 @@ public class PiedadeMultaQuestRequiredConfig : RequiredConfigure<PiedadeMultaQue
         _initArgs = initArgs;
     }
 
-    public override Task<IEnumerable<VehicleModel>> GetData()
+    public override async Task<IEnumerable<VehicleModel>> GetData()
     {
-        throw new NotImplementedException();
+        return await _vehicleRepository.GetByUf("SP");
     }
 }
-
