@@ -12,7 +12,7 @@ public partial class RunScrapGUI : Form
             throw new ArgumentNullException(nameof(scrapBuilder));
 
         _builder = scrapBuilder;
-
+        
         InitializeComponent();
     }
 }
