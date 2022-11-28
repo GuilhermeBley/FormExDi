@@ -6,6 +6,7 @@ using System.ComponentModel;
 
 namespace FormExDi.Scrap.EventQuest
 {
+    /// <inheritdoc cref="IAllWorksEndConfigure{TQuest, TData}" path="*"/>
     public abstract class AllWorksEndConfigureEvent<TQuest, TData> : IAllWorksEndConfigure<TQuest, TData>
         where TQuest : Quest<TData>
         where TData : class
@@ -13,6 +14,11 @@ namespace FormExDi.Scrap.EventQuest
         private readonly ISynchronizeInvoke? _syncInvoke;
         private readonly IAllWorksEndControl? _allWorksEndControl;
 
+        /// <summary>
+        /// Instance with sync invoke
+        /// </summary>
+        /// <param name="syncInvoke">Invokator</param>
+        /// <param name="allWorksEndControl">control event</param>
         public AllWorksEndConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IAllWorksEndControl? allWorksEndControl = null)
         {
             _syncInvoke = syncInvoke;

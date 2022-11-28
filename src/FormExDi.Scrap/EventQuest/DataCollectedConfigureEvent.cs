@@ -5,13 +5,19 @@ using System.ComponentModel;
 
 namespace FormExDi.Scrap.EventQuest
 {
+    /// <inheritdoc cref="IDataCollectedConfigure{TQuest, TData}" path="*"/>
     public abstract class DataCollectedConfigureEvent<TQuest, TData> : IDataCollectedConfigure<TQuest, TData>
         where TQuest : Quest<TData>
         where TData : class
     {
         private readonly ISynchronizeInvoke? _syncInvoke;
         private readonly IDataCollectedControl? _dataCollectedControl;
-
+        
+        /// <summary>
+        /// Instance with sync invoke
+        /// </summary>
+        /// <param name="syncInvoke">Invokator</param>
+        /// <param name="dataCollectedControl">control event</param>
         public DataCollectedConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IDataCollectedControl? dataCollectedControl = null)
         {
             _syncInvoke = syncInvoke;

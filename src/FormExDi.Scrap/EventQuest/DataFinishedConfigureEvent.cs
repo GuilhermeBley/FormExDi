@@ -6,6 +6,7 @@ using System.ComponentModel;
 
 namespace FormExDi.Scrap.EventQuest
 {
+    /// <inheritdoc cref="IDataFinishedConfigure{TQuest, TData}" path="*"/>
     public abstract class DataFinishedConfigureEvent<TQuest, TData> : IDataFinishedConfigure<TQuest, TData>
         where TQuest : Quest<TData>
         where TData : class
@@ -13,6 +14,11 @@ namespace FormExDi.Scrap.EventQuest
         private readonly IDataFinishedControl? _dataFinishedControl;
         private readonly ISynchronizeInvoke? _syncInvoke;
 
+        /// <summary>
+        /// Instance with sync invoke
+        /// </summary>
+        /// <param name="syncInvoke">Invokator</param>
+        /// <param name="dataFinishedControl">control event</param>
         public DataFinishedConfigureEvent(IDataFinishedControl? dataFinishedControl = null)
         {
             _dataFinishedControl = dataFinishedControl;

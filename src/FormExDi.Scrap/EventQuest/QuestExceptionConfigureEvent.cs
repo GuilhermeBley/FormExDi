@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace FormExDi.Scrap.EventQuest
 {
+    /// <inheritdoc cref="IQuestExceptionConfigure{TQuest, TData}" path="*"/>
     public abstract class QuestExceptionConfigureEvent<TQuest, TData> : IQuestExceptionConfigure<TQuest, TData>
         where TQuest : Quest<TData>
         where TData : class
@@ -12,6 +13,11 @@ namespace FormExDi.Scrap.EventQuest
         private readonly ISynchronizeInvoke? _syncInvoke;
         private readonly IQuestExceptionControl? _questExceptionControl;
 
+        /// <summary>
+        /// Instance with sync invoke
+        /// </summary>
+        /// <param name="syncInvoke">Invokator</param>
+        /// <param name="questExceptionControl">control event</param>
         public QuestExceptionConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IQuestExceptionControl? questExceptionControl = null)
         {
             _syncInvoke = syncInvoke;

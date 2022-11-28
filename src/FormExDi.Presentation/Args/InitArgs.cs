@@ -1,4 +1,4 @@
-﻿using FormExDi.Scrap.Args;
+﻿using FormExDi.Application.Args;
 
 namespace FormExDi.Presentation.Args;
 
