@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FormExDi.Application.Repository;
+﻿using FormExDi.Application.Repository;
 using FormExDi.Application.UoW;
 using FormExDi.Application.Services.Interface;
 using FormExDi.Application.Model;
