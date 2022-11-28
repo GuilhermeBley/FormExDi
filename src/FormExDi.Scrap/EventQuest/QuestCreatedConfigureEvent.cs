@@ -1,4 +1,5 @@
 ﻿using BlScraper.DependencyInjection.ConfigureModel;
+using BlScraper.Model;
 using FormExDi.Scrap.Events;
 using System.ComponentModel;
 

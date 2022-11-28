@@ -1,4 +1,6 @@
-﻿namespace FormExDi.Scrap.Events
+﻿using BlScraper.Model;
+
+namespace FormExDi.Scrap.Events
 {
     public interface IQuestExceptionControl
     {

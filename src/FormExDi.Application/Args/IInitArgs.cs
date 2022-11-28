@@ -1,4 +1,4 @@
-﻿namespace FormExDi.Scrap.Args;
+﻿namespace FormExDi.Application.Args;
 
 public interface IInitArgs
 {

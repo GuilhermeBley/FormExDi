@@ -1,7 +1,7 @@
 ﻿using BlScraper.DependencyInjection.ConfigureModel;
 using FormExDi.Application.Model;
 using FormExDi.Application.Repository;
-using FormExDi.Scrap.Args;
+using FormExDi.Application.Args;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas;
 
