@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FormExDi.Scrap.Extension;
+namespace FormExDi.Scrap.Extension.DependencyInjection;
 
-public static class DiScrap
+public static class DiScrapExtension
 {
-    public static IServiceCollection AddScrap(IServiceCollection services)
+    public static IServiceCollection AddScrap(this IServiceCollection services)
     {
         return services
             .AddScoped(typeof(Quest.PiedadeMultas.IPiedadeMultaQuery), typeof(Quest.PiedadeMultas.PiedadeMultaQuery));

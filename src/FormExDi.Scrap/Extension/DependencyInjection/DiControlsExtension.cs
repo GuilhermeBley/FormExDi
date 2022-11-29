@@ -2,9 +2,9 @@ using Microsoft.Extensions.DependencyInjection;
 using FormExDi.Scrap.Events;
 using System.ComponentModel;
 
-namespace FormExDi.Scrap.Extension;
+namespace FormExDi.Scrap.Extension.DependencyInjection;
 
-public static class DiControls
+public static class DiControlsExtension
 {
     public static IServiceCollection AddControls<TSyncInv>(
         this IServiceCollection services,

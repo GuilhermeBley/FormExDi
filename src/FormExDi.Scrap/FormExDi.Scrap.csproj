@@ -13,6 +13,7 @@
   <ItemGroup>
 	<PackageReference Include="BlScraper.DependencyInjection" Version="6.0.4" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
   </ItemGroup>
 
 </Project>
