@@ -4,7 +4,7 @@ using FormExDi.Core.Model;
 
 namespace FormExDi.Infrastructure.Repository;
 
-public class InfracaoRepository : BaseRepository, IInfracaoRepository
+internal class InfracaoRepository : BaseRepository, IInfracaoRepository
 {
     public InfracaoRepository(IDbSession dbSession, IMapper mapper) : base(dbSession, mapper)
     {

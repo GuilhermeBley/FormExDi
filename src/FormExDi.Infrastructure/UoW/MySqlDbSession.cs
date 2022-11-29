@@ -1,14 +1,17 @@
 ﻿using FormExDi.Application.UoW;
+using FormExDi.Infrastructure.Options;
+using Microsoft.Extensions.Options;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.Common;
+
 
 namespace FormExDi.Infrastructure.UoW;
 
 /// <summary>
 /// Manage connections and transactions
 /// </summary>
-public class MySqlDbSession : IUnitOfWork, IDbSession
+internal class MySqlDbSession : IUnitOfWork, IDbSession
 {
     private Guid _identifier { get; } = Guid.NewGuid();
     private DbConnection? _connection { get; set; }
@@ -22,11 +25,11 @@ public class MySqlDbSession : IUnitOfWork, IDbSession
     public IDbTransaction? Transaction => _transaction;
 
 
-    public MySqlDbSession(string connectionstring)
+    public MySqlDbSession(IOptions<ConnectionOptions> connectionOptions)
     {
         _createConnection = () =>
         {
-            return new MySqlConnection(connectionstring);
+            return new MySqlConnection(connectionOptions.Value.ConnectionString);
         };
     }
 

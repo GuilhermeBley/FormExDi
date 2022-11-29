@@ -4,7 +4,7 @@ using FormExDi.Core.Model;
 
 namespace FormExDi.Infrastructure.Repository
 {
-    public class VehicleRepository : BaseRepository, IVehicleRepository
+    internal class VehicleRepository : BaseRepository, IVehicleRepository
     {
         public VehicleRepository(IDbSession dbSession, IMapper mapper) : base(dbSession, mapper)
         {

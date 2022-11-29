@@ -1,3 +1,5 @@
+using FormExDi.Infrastructure.Extension;
+using FormExDi.Scrap.Extension.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,22 +20,23 @@ static class Program
         System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
         var host = Host.CreateDefaultBuilder()
-             .ConfigureAppConfiguration((context, builder) =>
-             {
-                 // Add other configuration files...
-                 builder.AddJsonFile("appsettings.json", optional:false);
+            .ConfigureAppConfiguration((context, builder) =>
+            {
+                // Add other configuration files...
+                builder.AddJsonFile("appsettings.json", optional:false);
 
-             })
-             .ConfigureServices((context, services) =>
-             {
-                 ConfigureServices(context.Configuration, services);
-                 
-             })
-             .ConfigureLogging(logging =>
-             {
-                 // Add other loggers...
-             })
-             .Build();
+            })
+            .ConfigureServices((context, services) =>
+            {
+                ConfigureServices(context.Configuration, services);
+                services.Configure<Infrastructure.Options.ConnectionOptions>(
+                    context.Configuration.GetSection(Infrastructure.Options.ConnectionOptions.Section));
+            })
+            .ConfigureLogging(logging =>
+            {
+                // Add other loggers...
+            })
+            .Build();
 
         var services = host.Services;
         var mainForm = services.GetRequiredService<RunScrapGUI>();
@@ -46,7 +49,8 @@ static class Program
             .AddSingleton<RunScrapGUI>()
             .AddSingleton<FormExDi.Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
             .AddScraperBuilder(
-                (builder)=>builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly));
-            
+                (builder) => builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly))
+            .AddRepositories()
+            .AddScrap();
     }
 }
