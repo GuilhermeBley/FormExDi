@@ -34,11 +34,7 @@ internal class PiedadeMultaQuery : IPiedadeMultaQuery
 
             _document.LoadHtml(await response.Content.ReadAsStringAsync());
         }
-
-        var formParams = _document.DocumentNode.GetFormsParams();
-
-        string placaL = string.Concat(placa.Take(4));
-        string placaR = string.Concat(placa.Skip(3));
+        
         using (var response = 
             await _client.GetAsync(urlMultas.Replace("{placa}", placa).Replace("{renavam}", renavam)))
         {
