@@ -19,9 +19,10 @@ namespace FormExDi.Scrap.EventQuest
         /// </summary>
         /// <param name="syncInvoke">Invokator</param>
         /// <param name="dataFinishedControl">control event</param>
-        public DataFinishedConfigureEvent(IDataFinishedControl? dataFinishedControl = null)
+        public DataFinishedConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IDataFinishedControl? dataFinishedControl = null)
         {
             _dataFinishedControl = dataFinishedControl;
+            _syncInvoke = syncInvoke;
         }
 
         public void OnDataFinished(ResultBase<TData> resultFinished)
