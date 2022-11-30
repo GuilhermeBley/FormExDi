@@ -28,7 +28,7 @@ static class Program
             })
             .ConfigureServices((context, services) =>
             {
-                ConfigureServices(context.Configuration, services);
+                ConfigureServices(services);
                 services.Configure<Infrastructure.Options.ConnectionOptions>(
                     context.Configuration.GetSection(Infrastructure.Options.ConnectionOptions.Section));
             })
@@ -43,10 +43,11 @@ static class Program
         System.Windows.Forms.Application.Run(mainForm);
     }
 
-    private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
+    private static void ConfigureServices(IServiceCollection services)
     {
         services
             .AddSingleton<RunScrapGUI>()
+            .AddControls<RunScrapGUI>()
             .AddSingleton<Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
             .AddScraperBuilder(
                 (builder) => builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly))
