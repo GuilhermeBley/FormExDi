@@ -35,7 +35,7 @@ namespace FormExDi.Scrap.EventQuest
                     await OnFinishedInvokeAsync(results);
 
                     if (_allWorksEndControl is not null)
-                        await _allWorksEndControl.OnAllWorksEventAsync(results);
+                        await _allWorksEndControl.OnAllWorksEndEventAsync(results);
                 }, null);
         }
 

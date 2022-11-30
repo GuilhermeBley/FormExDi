@@ -34,7 +34,7 @@ namespace FormExDi.Scrap.EventQuest
                     await OnCollectedInvokeAsync(dataCollected);
 
                     if (_dataCollectedControl is not null)
-                        await _dataCollectedControl.OnCollectedAsync(dataCollected);
+                        await _dataCollectedControl.OnDataCollectedAsync(dataCollected);
                 }, null);
         }
 

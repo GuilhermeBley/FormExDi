@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlScraper.DependencyInjection.Extension.Builder;
+using FormExDi.Presentation.Ui;
 
 namespace FormExDi.Presentation;
 
@@ -47,7 +48,13 @@ static class Program
     {
         services
             .AddSingleton<RunScrapGUI>()
-            .AddControls<RunScrapGUI>()
+            .AddControls<RunScrapGUI>(
+                typeof(RunScrapGUI), 
+                typeof(RunScrapGUI), 
+                typeof(RunScrapGUI), 
+                typeof(RunScrapGUI), 
+                typeof(RunScrapGUI), 
+                typeof(RunScrapGUI))
             .AddSingleton<Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
             .AddScraperBuilder(
                 (builder) => builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly))

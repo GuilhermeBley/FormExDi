@@ -8,6 +8,6 @@
         /// <summary>
         /// OnCreatedEventAsync
         /// </summary>
-        Task OnCreatedEventAsync(object questCreated);
+        Task OnQuestCreatedEventAsync(object questCreated);
     }
 }

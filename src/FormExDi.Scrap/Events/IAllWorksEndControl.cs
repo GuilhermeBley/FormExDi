@@ -10,6 +10,6 @@ namespace FormExDi.Scrap.Events
         /// <summary>
         /// OnAllWorksEventAsync
         /// </summary>
-        Task OnAllWorksEventAsync(IEnumerable<ResultBase<Exception?>> resultFinished);
+        Task OnAllWorksEndEventAsync(IEnumerable<ResultBase<Exception?>> resultFinished);
     }
 }

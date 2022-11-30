@@ -34,7 +34,7 @@ namespace FormExDi.Scrap.EventQuest
                     await OnCreatedInvokeAsync(questCreated);
 
                     if (_questCreatedControl is not null)
-                        await _questCreatedControl.OnCreatedEventAsync(questCreated);
+                        await _questCreatedControl.OnQuestCreatedEventAsync(questCreated);
                 }, null);
         }
 

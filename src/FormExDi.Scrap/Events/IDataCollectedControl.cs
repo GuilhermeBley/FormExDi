@@ -8,6 +8,6 @@
         /// <summary>
         /// OnCollectedAsync
         /// </summary>
-        Task OnCollectedAsync(IEnumerable<object> resultFinished);
+        Task OnDataCollectedAsync(IEnumerable<object> resultCollected);
     }
 }
