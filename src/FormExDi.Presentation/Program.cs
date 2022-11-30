@@ -47,7 +47,7 @@ static class Program
     {
         services
             .AddSingleton<RunScrapGUI>()
-            .AddSingleton<FormExDi.Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
+            .AddSingleton<Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
             .AddScraperBuilder(
                 (builder) => builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly))
             .AddRepositories()
