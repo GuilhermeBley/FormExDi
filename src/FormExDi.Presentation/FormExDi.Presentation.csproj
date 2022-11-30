@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>69e7af00-e2f3-41e5-844e-b5ffd06c564f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -24,7 +24,7 @@ static class Program
             {
                 // Add other configuration files...
                 builder.AddJsonFile("appsettings.json", optional:false);
-
+                builder.AddUserSecrets(typeof(RunScrapGUI).Assembly, true);
             })
             .ConfigureServices((context, services) =>
             {
