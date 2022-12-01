@@ -9,6 +9,10 @@
     <UserSecretsId>69e7af00-e2f3-41e5-844e-b5ffd06c564f</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
 	<PackageReference Include="BlScraper.DependencyInjection" Version="6.0.4" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />

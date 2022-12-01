@@ -2,17 +2,18 @@ using BlScraper.DependencyInjection.Builder;
 using BlScraper.Model;
 using BlScraper.Results;
 using FormExDi.Application.Args;
+using FormExDi.Presentation.Model;
 using FormExDi.Scrap.Events;
 
 namespace FormExDi.Presentation.Ui;
 
 public partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedControl, IDataFinishedControl, IGetArgsControl, IQuestCreatedControl, IQuestExceptionControl
 {
-    private readonly object _lock = new object();
+    private readonly object _lock = new();
     private readonly IScrapBuilder _builder;
     private readonly string _questName;
     private IModelScraper? _model;
-
+    private SearchsQttStatus _searchsQttStatus = new(0,0);
 
     public RunScrapGUI(IScrapBuilder scrapBuilder, IInitArgs initArgs)
     {
@@ -22,7 +23,7 @@ public partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCont
         if (initArgs is null)
             throw new ArgumentNullException(nameof(initArgs));
 
-        if (string.IsNullOrEmpty(_questName))
+        if (string.IsNullOrEmpty(initArgs.QuestName))
             throw new ArgumentNullException(nameof(initArgs.QuestName));
 
         _builder = scrapBuilder;
@@ -38,9 +39,7 @@ public partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCont
 
     public async Task OnDataCollectedAsync(IEnumerable<object> resultCollected)
     {
-        ProgressBarSearchs.Value = 0;
-        ProgressBarSearchs.Minimum = 0;
-        ProgressBarSearchs.Maximum = resultCollected.Count();
+        SetSearched(0, resultCollected.Count());
 
         await Task.CompletedTask;
     }
@@ -70,6 +69,8 @@ public partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCont
 
     private async void RunScrapGUI_Load(object sender, EventArgs e)
     {
+        LabelTitle.Text = $"Search {_questName}";
+
         await TryCreateAndRunModel();
     }
 
@@ -134,6 +135,19 @@ public partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCont
 
     private void AddSearched()
     {
+        _searchsQttStatus.AddCurrent();
         ProgressBarSearchs.Value++;
+        LabelQtt.Text = _searchsQttStatus.ToString();
+    }
+
+    private void SetSearched(int init, int max)
+    {
+        _searchsQttStatus = new(init, max);
+
+        ProgressBarSearchs.Value = _searchsQttStatus.CurrentQtd;
+        ProgressBarSearchs.Minimum = 0;
+        ProgressBarSearchs.Maximum = _searchsQttStatus.TotalQtd;
+
+        LabelQtt.Text = _searchsQttStatus.ToString();
     }
 }

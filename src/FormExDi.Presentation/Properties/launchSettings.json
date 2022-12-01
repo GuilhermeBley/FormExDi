@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FormExDi.Presentation": {
+      "commandName": "Project",
+      "commandLineArgs": "PiedadeMultaQuest 1"
+    }
+  }
+}
