@@ -2,6 +2,7 @@
 using FormExDi.Application.Model;
 using FormExDi.Application.Repository;
 using FormExDi.Application.Args;
+using FormExDi.Application.Services.Interface;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas;
 
@@ -9,12 +10,12 @@ public class PiedadeMultaQuestRequiredConfig : RequiredConfigure<PiedadeMultaQue
 {
     public override int initialQuantity => _initArgs.QuantityToRunQuest;
 
-    private readonly IVehicleRepository _vehicleRepository;
+    private readonly IVehicleService _vehicleRepository;
     private readonly IInitArgs _initArgs;
 
-    public PiedadeMultaQuestRequiredConfig(IVehicleRepository vehicleRepository, IInitArgs initArgs)
+    public PiedadeMultaQuestRequiredConfig(IVehicleService vehicleService, IInitArgs initArgs)
     {
-        _vehicleRepository = vehicleRepository;
+        _vehicleRepository = vehicleService;
         _initArgs = initArgs;
     }
 

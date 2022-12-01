@@ -9,5 +9,6 @@ public interface IVehicleService
     Task<IResultGeneric<VehicleModel>> DeleteAsync(string renavam);
     Task<IResultGeneric<IEnumerable<VehicleModel>>> GetAsync();
     Task<IResultGeneric<VehicleModel>> GetByRenavamAsync(string renavam);
+    Task<IEnumerable<VehicleModel>> GetByUf(string uf);
 }
 

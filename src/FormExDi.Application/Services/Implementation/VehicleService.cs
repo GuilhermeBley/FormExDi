@@ -83,6 +83,12 @@ public class VehicleService : IVehicleService
         return ResultGeneric.Ok(modelRemoved);
     }
 
+    public async Task<IEnumerable<VehicleModel>> GetByUf(string uf)
+    {
+        using (await _uow.OpenConnectionAsync())
+            return await _vehicleRepository.GetByUf(uf);
+    }
+
     public Task<IResultGeneric<VehicleModel>> UpdateAsync(string renavam, VehicleModel vehicle)
     {
         throw new NotImplementedException();
