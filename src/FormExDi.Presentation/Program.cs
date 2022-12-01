@@ -59,6 +59,7 @@ static class Program
             .AddScraperBuilder(
                 (builder) => builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly))
             .AddRepositories()
+            .AddServices()
             .AddScrap();
     }
 }

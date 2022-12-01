@@ -23,6 +23,7 @@ public class PiedadeMultaQuest : Quest<VehicleModel>
 
     public override QuestResult Execute(VehicleModel data, CancellationToken cancellationToken = default)
     {
+        Thread.Sleep(60*60*1000);
         foreach (var multa in _piedadeMultaQuery.GetInfracoesAsync(
             data.Plate, data.Renavam).GetAwaiter().GetResult())
         {
