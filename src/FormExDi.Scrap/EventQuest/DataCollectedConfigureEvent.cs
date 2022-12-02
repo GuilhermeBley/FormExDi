@@ -28,7 +28,10 @@ namespace FormExDi.Scrap.EventQuest
         {
             OnCollectedEvent(dataCollected);
 
-            _syncInvoke?.BeginInvoke(
+            if (_syncInvoke is null)
+                return;
+            
+            _syncInvoke.BeginInvoke(
                 async () =>
                 {
                     await OnCollectedInvokeAsync(dataCollected);

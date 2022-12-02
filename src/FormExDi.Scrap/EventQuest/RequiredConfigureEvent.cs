@@ -12,5 +12,6 @@ namespace FormExDi.Scrap.EventQuest
     {
         public sealed override bool IsRequiredDataCollected => true;
         public sealed override bool IsRequiredAllWorksEnd => true;
+        public sealed override bool IsRequiredDataFinished => true;
     }
 }

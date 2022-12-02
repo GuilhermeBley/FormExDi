@@ -69,9 +69,13 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
         await Task.CompletedTask;
     }
 
-    protected override void OnClosed(EventArgs e)
+    protected async override void OnClosed(EventArgs e)
     {
         _cts.Cancel();
+        _cts.Dispose();
+
+        if (_model is not null)
+            await TryDisposeModel();
     }
 
     private async void RunScrapGUI_Load(object sender, EventArgs e)
@@ -156,10 +160,8 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
         ProgressBarSearchs.Minimum = 0;
         ProgressBarSearchs.Maximum = _searchsQttStatus.TotalQtd;
         ProgressBarSearchs.Value =10;
-        ProgressBarSearchs.Refresh();
 
         LabelQtt.Text = _searchsQttStatus.ToString();
-        LabelQtt.Refresh();
     }
 
     private async Task WaitHandleCreate(CancellationToken cancellationToken = default)
