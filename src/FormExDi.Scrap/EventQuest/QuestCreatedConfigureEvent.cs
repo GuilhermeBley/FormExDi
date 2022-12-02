@@ -18,7 +18,7 @@ namespace FormExDi.Scrap.EventQuest
         /// </summary>
         /// <param name="syncInvoke">Invokator</param>
         /// <param name="questCreatedControl">control event</param>
-        public QuestCreatedConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IQuestCreatedControl? questCreatedControl = null)
+        public QuestCreatedConfigureEvent(ISynchronizeInvoke syncInvoke, IQuestCreatedControl? questCreatedControl)
         {
             _syncInvoke = syncInvoke;
             _questCreatedControl = questCreatedControl;

@@ -19,7 +19,7 @@ namespace FormExDi.Scrap.EventQuest
         /// </summary>
         /// <param name="syncInvoke">Invokator</param>
         /// <param name="getArgsControl">control event</param>
-        public GetArgsConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IGetArgsControl? getArgsControl = null)
+        public GetArgsConfigureEvent(ISynchronizeInvoke syncInvoke, IGetArgsControl? getArgsControl)
         {
             _syncInvoke = syncInvoke;
             _getArgsControl = getArgsControl;

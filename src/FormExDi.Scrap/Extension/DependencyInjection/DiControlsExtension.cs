@@ -42,6 +42,39 @@ public static class DiControlsExtension
         
         services.AddSingleton(typeof(ISynchronizeInvoke), synchronizeInvoke);
 
+        AddControls(services, allWorksEndControl, dataCollectedControl, dataFinishedControl,
+            getArgsControl, questCreatedControl, questExceptionControl);
+
+        return services;
+    }
+
+    public static IServiceCollection AddControls(
+        this IServiceCollection services,
+        Func<IServiceProvider, ISynchronizeInvoke> synchronizeInvoke,
+        Type? allWorksEndControl = null,
+        Type? dataCollectedControl = null,
+        Type? dataFinishedControl = null,
+        Type? getArgsControl = null,
+        Type? questCreatedControl = null,
+        Type? questExceptionControl = null)
+    {
+        services.AddSingleton(typeof(ISynchronizeInvoke), (serviceProvider) => synchronizeInvoke.Invoke(serviceProvider));
+
+        AddControls(services, allWorksEndControl, dataCollectedControl, dataFinishedControl,
+            getArgsControl, questCreatedControl, questExceptionControl);
+
+        return services;
+    }
+
+    public static IServiceCollection AddControls(
+        this IServiceCollection services,
+        Type? allWorksEndControl = null,
+        Type? dataCollectedControl = null,
+        Type? dataFinishedControl = null,
+        Type? getArgsControl = null,
+        Type? questCreatedControl = null,
+        Type? questExceptionControl = null)
+    {
         if (allWorksEndControl is not null && !typeof(IAllWorksEndControl).IsAssignableFrom(allWorksEndControl))
             throw new ArgumentException($"{nameof(IAllWorksEndControl)} isn't assignable from {nameof(allWorksEndControl)}.");
 

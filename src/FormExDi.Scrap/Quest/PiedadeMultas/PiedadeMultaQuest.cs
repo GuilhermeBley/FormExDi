@@ -1,5 +1,4 @@
-﻿using BlScraper.DependencyInjection.ConfigureModel;
-using BlScraper.Model;
+﻿using BlScraper.Model;
 using FormExDi.Application.Model;
 using FormExDi.Application.Services.Interface;
 using System;

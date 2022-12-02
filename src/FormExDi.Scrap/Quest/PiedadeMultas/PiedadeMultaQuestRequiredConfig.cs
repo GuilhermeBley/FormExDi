@@ -1,12 +1,10 @@
-﻿using BlScraper.DependencyInjection.ConfigureModel;
-using FormExDi.Application.Model;
-using FormExDi.Application.Repository;
+﻿using FormExDi.Application.Model;
 using FormExDi.Application.Args;
 using FormExDi.Application.Services.Interface;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas;
 
-public class PiedadeMultaQuestRequiredConfig : RequiredConfigure<PiedadeMultaQuest, VehicleModel>
+public class PiedadeMultaQuestRequiredConfig : RequiredConfigureEvent<PiedadeMultaQuest, VehicleModel>
 {
     public override int initialQuantity => _initArgs.QuantityToRunQuest;
 

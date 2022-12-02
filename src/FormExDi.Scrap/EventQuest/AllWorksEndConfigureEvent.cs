@@ -19,7 +19,7 @@ namespace FormExDi.Scrap.EventQuest
         /// </summary>
         /// <param name="syncInvoke">Invokator</param>
         /// <param name="allWorksEndControl">control event</param>
-        public AllWorksEndConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IAllWorksEndControl? allWorksEndControl = null)
+        public AllWorksEndConfigureEvent(ISynchronizeInvoke syncInvoke, IAllWorksEndControl allWorksEndControl)
         {
             _syncInvoke = syncInvoke;
             _allWorksEndControl = allWorksEndControl;

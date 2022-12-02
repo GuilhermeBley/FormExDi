@@ -18,7 +18,7 @@ namespace FormExDi.Scrap.EventQuest
         /// </summary>
         /// <param name="syncInvoke">Invokator</param>
         /// <param name="dataCollectedControl">control event</param>
-        public DataCollectedConfigureEvent(ISynchronizeInvoke? syncInvoke = null, IDataCollectedControl? dataCollectedControl = null)
+        public DataCollectedConfigureEvent(ISynchronizeInvoke syncInvoke, IDataCollectedControl dataCollectedControl)
         {
             _syncInvoke = syncInvoke;
             _dataCollectedControl = dataCollectedControl;
