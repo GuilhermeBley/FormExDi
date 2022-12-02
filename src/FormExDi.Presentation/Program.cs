@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlScraper.DependencyInjection.Extension.Builder;
 using FormExDi.Presentation.Ui;
+using FormExDi.Presentation.Model;
 
 namespace FormExDi.Presentation;
 
@@ -46,9 +47,12 @@ static class Program
 
     private static void ConfigureServices(IServiceCollection services)
     {
+        
         services
             .AddSingleton<RunScrapGUI>()
-            .AddControls<RunScrapGUI>(
+            .AddSingleton<SyncListDelegate>()
+            .AddControls(
+                (serviceProvider) => serviceProvider.GetRequiredService<RunScrapGUI>(),
                 typeof(RunScrapGUI), 
                 typeof(RunScrapGUI), 
                 typeof(RunScrapGUI), 
