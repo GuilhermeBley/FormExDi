@@ -50,7 +50,6 @@ static class Program
         
         services
             .AddSingleton<RunScrapGUI>()
-            .AddSingleton<SyncListDelegate>()
             .AddControls(
                 (serviceProvider) => serviceProvider.GetRequiredService<RunScrapGUI>(),
                 typeof(RunScrapGUI), 

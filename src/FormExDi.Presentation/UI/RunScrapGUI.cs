@@ -14,11 +14,10 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
     private readonly object _lock = new();
     private readonly IScrapBuilder _builder;
     private readonly string _questName;
-    private readonly SyncListDelegate _syncListDelegate;
     private IModelScraper? _model;
     private SearchsQttStatus _searchsQttStatus = new(0,0);
 
-    public RunScrapGUI(IScrapBuilder scrapBuilder, IInitArgs initArgs, SyncListDelegate syncListDelegate)
+    public RunScrapGUI(IScrapBuilder scrapBuilder, IInitArgs initArgs)
     {
         if (scrapBuilder is null)
             throw new ArgumentNullException(nameof(scrapBuilder));
@@ -29,12 +28,8 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
         if (string.IsNullOrEmpty(initArgs.QuestName))
             throw new ArgumentNullException(nameof(initArgs.QuestName));
 
-        if (syncListDelegate is null)
-            throw new ArgumentNullException(nameof(syncListDelegate));
-
         _builder = scrapBuilder;
         _questName = initArgs.QuestName;
-        _syncListDelegate = syncListDelegate;
 
         InitializeComponent();
     }
@@ -79,9 +74,13 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
         _cts.Cancel();
     }
 
-    private void RunScrapGUI_Load(object sender, EventArgs e)
+    private async void RunScrapGUI_Load(object sender, EventArgs e)
     {
         LabelTitle.Text = $"Search {_questName}";
+
+        await WaitHandleCreate(_cts.Token);
+        Update();
+        await TryCreateAndRunModel(_cts.Token);
     }
 
     private async Task<bool> TryCreateAndRunModel(CancellationToken cancellationToken = default)
@@ -154,36 +153,18 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
     {
         _searchsQttStatus = new(init, max);
 
-        ProgressBarSearchs.Value = _searchsQttStatus.CurrentQtd;
         ProgressBarSearchs.Minimum = 0;
         ProgressBarSearchs.Maximum = _searchsQttStatus.TotalQtd;
+        ProgressBarSearchs.Value =10;
+        ProgressBarSearchs.Refresh();
 
         LabelQtt.Text = _searchsQttStatus.ToString();
+        LabelQtt.Refresh();
     }
 
     private async Task WaitHandleCreate(CancellationToken cancellationToken = default)
     {
-        do
-        {
+        while (!IsHandleCreated)
             await Task.Delay(200, cancellationToken);
-            Refresh();
-        } while (!IsHandleCreated);
-    }
-
-    private async void RunScrapGUI_Shown(object sender, EventArgs e)
-    {
-        await WaitHandleCreate(_cts.Token);
-        Update();
-        await TryCreateAndRunModel(_cts.Token);
-    }
-
-    private void TimerInvoke_Tick(object sender, EventArgs e)
-    {
-        var @delegate = _syncListDelegate.GetNext();
-
-        if (@delegate is null)
-            return;
-
-        BeginInvoke(@delegate);
     }
 }
