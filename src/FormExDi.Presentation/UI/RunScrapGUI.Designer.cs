@@ -28,6 +28,7 @@ partial class RunScrapGUI
     /// </summary>
     private void InitializeComponent()
     {
+            this.components = new System.ComponentModel.Container();
             this.ProgressBarSearchs = new System.Windows.Forms.ProgressBar();
             this.button1 = new System.Windows.Forms.Button();
             this.LabelTitle = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@ partial class RunScrapGUI
             this.Result = new System.Windows.Forms.ColumnHeader();
             this.LabelQtt = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.TimerInfo = new System.Windows.Forms.Timer(this.components);
             this.ScrapInfo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -117,6 +119,12 @@ partial class RunScrapGUI
             this.panel1.Size = new System.Drawing.Size(776, 46);
             this.panel1.TabIndex = 0;
             // 
+            // TimerInfo
+            // 
+            this.TimerInfo.Enabled = true;
+            this.TimerInfo.Interval = 1000;
+            this.TimerInfo.Tick += new System.EventHandler(this.TimerInfo_Tick);
+            // 
             // RunScrapGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -151,4 +159,5 @@ partial class RunScrapGUI
     private ColumnHeader Result;
     private Label LabelQtt;
     private Panel panel1;
+    private System.Windows.Forms.Timer TimerInfo;
 }

@@ -3,6 +3,7 @@ using BlScraper.Model;
 using BlScraper.Results;
 using FormExDi.Application.Args;
 using FormExDi.Presentation.Model;
+using FormExDi.Presentation.Services.Interfaces;
 using FormExDi.Scrap.Events;
 using System.ComponentModel;
 
@@ -14,10 +15,11 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
     private readonly object _lock = new();
     private readonly IScrapBuilder _builder;
     private readonly string _questName;
+    private readonly IInfoService _infoService;
     private IModelScraper? _model;
     private SearchsQttStatus _searchsQttStatus = new(0,0);
 
-    public RunScrapGUI(IScrapBuilder scrapBuilder, IInitArgs initArgs)
+    public RunScrapGUI(IScrapBuilder scrapBuilder, IInitArgs initArgs, IInfoService infoService)
     {
         if (scrapBuilder is null)
             throw new ArgumentNullException(nameof(scrapBuilder));
@@ -30,43 +32,39 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
 
         _builder = scrapBuilder;
         _questName = initArgs.QuestName;
+        _infoService = infoService;
 
         InitializeComponent();
     }
 
-    public async Task OnAllWorksEndEventAsync(IEnumerable<ResultBase<Exception?>> resultFinished)
+    public Task OnAllWorksEndEventAsync(IEnumerable<ResultBase<Exception?>> resultFinished)
     {
-        await TryDisposeModel();
+        throw new NotImplementedException();
     }
 
-    public async Task OnDataCollectedAsync(IEnumerable<object> resultCollected)
+    public Task OnDataCollectedAsync(IEnumerable<object> resultCollected)
     {
-        SetSearched(0, resultCollected.Count());
-
-        await Task.CompletedTask;
+        throw new NotImplementedException();
     }
 
-    public async Task OnQuestCreatedEventAsync(object questCreated)
+    public Task OnQuestCreatedEventAsync(object questCreated)
     {
-        await Task.CompletedTask;
+        throw new NotImplementedException();
     }
 
-    public async Task OnDataFinishedEventAsync(ResultBase dataCollected)
+    public Task OnDataFinishedEventAsync(ResultBase dataCollected)
     {
-        if (dataCollected.IsSuccess)
-            AddSearched();
-
-        await Task.CompletedTask;
+        throw new NotImplementedException();
     }
 
-    public async Task OnGetArgsEventAsync(object[] dataCollected)
+    public Task OnGetArgsEventAsync(object[] dataCollected)
     {
-        await Task.CompletedTask;
+        throw new NotImplementedException();
     }
 
-    public async Task OnOccursExceptionEventAsync(Exception exception, object data, QuestResult result)
+    public Task OnOccursExceptionEventAsync(Exception exception, object data, QuestResult result)
     {
-        await Task.CompletedTask;
+        throw new NotImplementedException();
     }
 
     protected async override void OnClosed(EventArgs e)
@@ -115,6 +113,8 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
 
         var result = await _model.Run();
 
+        SetSearched(0, 0);
+
         if (result.IsSuccess)
             return true;
 
@@ -146,10 +146,10 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
         return false;
     }
 
-    private void AddSearched()
+    private void SetSearched(int current)
     {
-        _searchsQttStatus.AddCurrent();
-        ProgressBarSearchs.Value++;
+        _searchsQttStatus.SetCurrent(current);
+        ProgressBarSearchs.Value = _searchsQttStatus.CurrentQtd;
         LabelQtt.Text = _searchsQttStatus.ToString();
     }
 
@@ -159,7 +159,7 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
 
         ProgressBarSearchs.Minimum = 0;
         ProgressBarSearchs.Maximum = _searchsQttStatus.TotalQtd;
-        ProgressBarSearchs.Value =10;
+        ProgressBarSearchs.Value =0;
 
         LabelQtt.Text = _searchsQttStatus.ToString();
     }
@@ -168,5 +168,11 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
     {
         while (!IsHandleCreated)
             await Task.Delay(200, cancellationToken);
+    }
+
+    private void TimerInfo_Tick(object sender, EventArgs e)
+    {
+        var modelScrapInfo = _infoService.GetDataByModel(_model).GetAwaiter().GetResult();
+        SetSearched(modelScrapInfo.CurrentSearch);
     }
 }

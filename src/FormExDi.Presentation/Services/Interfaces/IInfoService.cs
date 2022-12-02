@@ -5,6 +5,6 @@ namespace FormExDi.Presentation.Services.Interfaces
 {
     internal interface IInfoService
     {
-        Task<ScrapData> GetDataByModel(IModelScraper modelScraper);
+        Task<ScrapData> GetDataByModel(IModelScraper? modelScraper);
     }
 }

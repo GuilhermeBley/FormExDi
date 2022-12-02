@@ -25,6 +25,16 @@
                 _currentQtd++;
         }
 
+        public void SetCurrent(int quantity)
+        {
+            lock (_lock)
+            {
+                if (quantity < 0 || quantity > _totalQtd)
+                    return;
+                _currentQtd = quantity;
+            }
+        }
+
         public override string ToString()
         {
             return $"{_currentQtd}/{_totalQtd}";

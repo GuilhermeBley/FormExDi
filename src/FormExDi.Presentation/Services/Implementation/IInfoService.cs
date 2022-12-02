@@ -6,9 +6,13 @@ namespace FormExDi.Presentation.Services.Implementation
 {
     internal class InfoService : IInfoService
     {
-        public async Task<ScrapData> GetDataByModel(IModelScraper modelScraper)
+        public async Task<ScrapData> GetDataByModel(IModelScraper? modelScraper)
         {
             await Task.CompletedTask;
+
+            if (modelScraper is null)
+                return ScrapData.None;
+            
             return ScrapData.Create(
                 modelScraper.IdScraper.ToString(),
                 string.Empty,
