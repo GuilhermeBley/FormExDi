@@ -1,14 +1,14 @@
-﻿using FormExDi.Application.Model;
-using FormExDi.Scrap.Events;
-using System.ComponentModel;
+﻿using BlScraper.DependencyInjection.ConfigureModel;
+using BlScraper.Results;
+using FormExDi.Application.Model;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas
 {
-    internal class PiedadeMultaDataFinishedConfigure : DataFinishedConfigureEvent<PiedadeMultaQuest, VehicleModel>
+    internal class PiedadeMultaDataFinishedConfigure : IDataFinishedConfigure<PiedadeMultaQuest, VehicleModel>
     {
-        public PiedadeMultaDataFinishedConfigure(ISynchronizeInvoke syncInvoke, IDataFinishedControl dataFinishedControl) 
-            : base(syncInvoke, dataFinishedControl)
+        public void OnDataFinished(ResultBase<VehicleModel> resultFinished)
         {
+            throw new NotImplementedException();
         }
     }
 }

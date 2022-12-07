@@ -4,12 +4,11 @@ using BlScraper.Results;
 using FormExDi.Application.Args;
 using FormExDi.Presentation.Model;
 using FormExDi.Presentation.Services.Interfaces;
-using FormExDi.Scrap.Events;
 using System.ComponentModel;
 
 namespace FormExDi.Presentation.Ui;
 
-internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedControl, IDataFinishedControl, IGetArgsControl, IQuestCreatedControl, IQuestExceptionControl
+internal partial class RunScrapGUI : Form
 {
     private readonly CancellationTokenSource _cts = new();
     private readonly object _lock = new();
@@ -35,36 +34,6 @@ internal partial class RunScrapGUI : Form, IAllWorksEndControl, IDataCollectedCo
         _infoService = infoService;
 
         InitializeComponent();
-    }
-
-    public Task OnAllWorksEndEventAsync(IEnumerable<ResultBase<Exception?>> resultFinished)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task OnDataCollectedAsync(IEnumerable<object> resultCollected)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task OnQuestCreatedEventAsync(object questCreated)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task OnDataFinishedEventAsync(ResultBase dataCollected)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task OnGetArgsEventAsync(object[] dataCollected)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task OnOccursExceptionEventAsync(Exception exception, object data, QuestResult result)
-    {
-        throw new NotImplementedException();
     }
 
     protected async override void OnClosed(EventArgs e)

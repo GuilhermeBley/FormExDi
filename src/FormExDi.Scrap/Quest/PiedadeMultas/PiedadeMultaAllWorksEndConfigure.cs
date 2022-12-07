@@ -1,19 +1,15 @@
-﻿using BlScraper.Results;
+﻿using BlScraper.DependencyInjection.ConfigureModel;
+using BlScraper.Results;
+using BlScraper.Results.Models;
 using FormExDi.Application.Model;
-using FormExDi.Scrap.Events;
-using System.ComponentModel;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas
 {
-    public class PiedadeMultaAllWorksEndConfigure : AllWorksEndConfigureEvent<PiedadeMultaQuest, VehicleModel>
+    public class PiedadeMultaAllWorksEndConfigure : IAllWorksEndConfigure<PiedadeMultaQuest, VehicleModel>
     {
-        public PiedadeMultaAllWorksEndConfigure(ISynchronizeInvoke syncInvoke, IAllWorksEndControl allWorksEndControl) : base(syncInvoke, allWorksEndControl)
+        public void OnFinished(EndEnumerableModel results)
         {
-        }
-
-        protected override async Task OnFinishedInvokeAsync(IEnumerable<ResultBase<Exception?>> results)
-        {
-            await Task.Delay(60*1000);
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,18 +1,13 @@
-﻿using FormExDi.Application.Model;
-using FormExDi.Scrap.Events;
-using System.ComponentModel;
+﻿using BlScraper.DependencyInjection.ConfigureModel;
+using FormExDi.Application.Model;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas
 {
-    internal class PiedadeMultaOnCollectedDataConfigure : DataCollectedConfigureEvent<PiedadeMultaQuest, VehicleModel>
+    internal class PiedadeMultaOnCollectedDataConfigure : IDataCollectedConfigure<PiedadeMultaQuest, VehicleModel>
     {
-        public PiedadeMultaOnCollectedDataConfigure(ISynchronizeInvoke syncInvoke, IDataCollectedControl dataCollectedControl) : base(syncInvoke, dataCollectedControl)
+        public void OnCollected(IEnumerable<VehicleModel> dataCollected)
         {
-        }
-
-        protected override async Task OnCollectedInvokeAsync(IEnumerable<VehicleModel> dataCollected)
-        {
-            await Task.CompletedTask;
+            throw new NotImplementedException();
         }
     }
 }

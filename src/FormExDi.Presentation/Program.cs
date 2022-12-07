@@ -52,14 +52,6 @@ static class Program
         
         services
             .AddSingleton<RunScrapGUI>()
-            .AddControls(
-                (serviceProvider) => serviceProvider.GetRequiredService<RunScrapGUI>(),
-                typeof(RunScrapGUI), 
-                typeof(RunScrapGUI), 
-                typeof(RunScrapGUI), 
-                typeof(RunScrapGUI), 
-                typeof(RunScrapGUI), 
-                typeof(RunScrapGUI))
             .AddSingleton<Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
             .AddScraperBuilder(
                 (builder) => builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly))
