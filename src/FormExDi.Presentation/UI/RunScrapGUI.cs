@@ -4,7 +4,6 @@ using BlScraper.Results;
 using FormExDi.Application.Args;
 using FormExDi.Presentation.Model;
 using FormExDi.Presentation.Services.Interfaces;
-using System.ComponentModel;
 
 namespace FormExDi.Presentation.Ui;
 
@@ -80,9 +79,11 @@ internal partial class RunScrapGUI : Form
         if (cancellationToken.IsCancellationRequested)
             return false;
 
+        LabelTitle.Text = $"Search {_questName}.";
+
         var result = await _model.Run();
 
-        SetSearched(0, 0);
+        SetSearched(0, result.Result.Searches.Count());
 
         if (result.IsSuccess)
             return true;
@@ -143,5 +144,11 @@ internal partial class RunScrapGUI : Form
     {
         var modelScrapInfo = _infoService.GetDataByModel(_model).GetAwaiter().GetResult();
         SetSearched(modelScrapInfo.CurrentSearch);
+
+        if (modelScrapInfo.IsFinished)
+        {
+            TimerInfo.Enabled = false;
+            Dispose();
+        }
     }
 }

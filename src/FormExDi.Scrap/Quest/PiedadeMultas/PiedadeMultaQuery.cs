@@ -1,12 +1,12 @@
 using FormExDi.Application.Model;
-using FormExDi.Scrap.Extension.Html;
+using System.Web;
 using HtmlAgilityPack;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas;
 
-public interface IPiedadeMultaQuery
+public interface IPiedadeMultaQuery : IDisposable
 {
-    Task<IEnumerable<InfracaoModel>> GetInfracoesAsync(string placa, string renavam);
+    Task<IEnumerable<InfracaoModel>> GetInfracoesAsync(string placa, string renavam, CancellationToken cancellationToken = default);
 }
 
 internal class PiedadeMultaQuery : IPiedadeMultaQuery
@@ -22,32 +22,37 @@ internal class PiedadeMultaQuery : IPiedadeMultaQuery
         _document = document;
     }
 
-    public async Task<IEnumerable<InfracaoModel>> GetInfracoesAsync(string placa, string renavam)
+    public void Dispose()
+    {
+        _client.Dispose();
+    }
+
+    public async Task<IEnumerable<InfracaoModel>> GetInfracoesAsync(string placa, string renavam, CancellationToken cancellationToken = default)
     {
         if (placa is null || placa.Length != 7)
             throw new ArgumentException("Placa in invalid format.");
 
-        using (var response = await _client.GetAsync(url))
+        using (var response = await _client.GetAsync(url, cancellationToken))
         {
             if (!response.IsSuccessStatusCode)
                 throw new HttpRequestException();
 
-            _document.LoadHtml(await response.Content.ReadAsStringAsync());
+            _document.LoadHtml(await response.Content.ReadAsStringAsync(cancellationToken));
         }
         
         using (var response = 
-            await _client.GetAsync(urlMultas.Replace("{placa}", placa).Replace("{renavam}", renavam)))
+            await _client.GetAsync(urlMultas.Replace("{placa}", placa).Replace("{renavam}", renavam), cancellationToken))
         {
             if (!response.IsSuccessStatusCode)
                 throw new HttpRequestException();
 
-            _document.LoadHtml(await response.Content.ReadAsStringAsync());
+            _document.LoadHtml(HttpUtility.HtmlDecode(await response.Content.ReadAsStringAsync(cancellationToken)));
         }
         
-        if (_document.DocumentNode.SelectSingleNode($"//*[contains(@text, '{renavam.TrimStart('0')}')]") is null)
+        if (_document.DocumentNode.SelectSingleNode($"//*[contains(text(), '{renavam.TrimStart('0')}')]") is null)
             throw new HttpRequestException("Placa not found in HTML.");
 
-        if (_document.DocumentNode.SelectSingleNode($"Não foram encontradas infrações") is not null)
+        if (_document.DocumentNode.SelectSingleNode($"//*[contains(text(), 'Não foram encontradas infrações')]") is not null)
             return Enumerable.Empty<InfracaoModel>();
 
         throw new NotImplementedException();

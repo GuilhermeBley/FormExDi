@@ -9,7 +9,7 @@ namespace FormExDi.Scrap.Quest.PiedadeMultas
     {
         public void OnFinished(EndEnumerableModel results)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -19,8 +19,9 @@
         public int TotalSearch { get; private set; } = 0;
         public int CountScrap { get; private set; } = 0;
         public int CountInProgress { get; private set; } = 0;
+        public bool IsFinished { get; private set; } = false;
 
-        private ScrapData(string id, string name, string description, DateTime? start, DateTime? end, int currentSearch, int totalSearch, int countScrap, int countInProgress) 
+        private ScrapData(string id, string name, string description, DateTime? start, DateTime? end, int currentSearch, int totalSearch, int countScrap, int countInProgress, bool isFinished = false) 
         { 
             Id = id;
             Name = name;
@@ -31,9 +32,10 @@
             TotalSearch = totalSearch;
             CountScrap = countScrap;
             CountInProgress = countInProgress;
+            IsFinished = isFinished;
         }
 
-        public static ScrapData Create(string id, string name, string description, DateTime? start, DateTime? end, int currentSearch, int totalSearch, int countScrap, int countInProgress)
+        public static ScrapData Create(string id, string name, string description, DateTime? start, DateTime? end, int currentSearch, int totalSearch, int countScrap, int countInProgress, bool isFinished = false)
         {
             if (id is null)
                 id = Guid.Empty.ToString();
@@ -56,7 +58,7 @@
             if (countInProgress > countScrap)
                 countInProgress = countScrap;
 
-            return new(id, name, description, start, end, currentSearch, totalSearch, countScrap, countInProgress);
+            return new(id, name, description, start, end, currentSearch, totalSearch, countScrap, countInProgress, isFinished);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FormExDi.Scrap.Quest.PiedadeMultas
     {
         public void OnDataFinished(ResultBase<VehicleModel> resultFinished)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

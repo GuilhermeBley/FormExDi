@@ -22,10 +22,10 @@ public class PiedadeMultaQuest : Quest<VehicleModel>
 
     public override QuestResult Execute(VehicleModel data, CancellationToken cancellationToken = default)
     {
-        Thread.Sleep(50*1000);
+        cancellationToken.WaitHandle.WaitOne(1000 * 5);
 
         foreach (var multa in _piedadeMultaQuery.GetInfracoesAsync(
-            data.Plate, data.Renavam).GetAwaiter().GetResult())
+            data.Plate, data.Renavam, cancellationToken).GetAwaiter().GetResult())
         {
             if (multa.DtInfracao.Year < 2016) // Business rule
                 continue;
@@ -34,6 +34,11 @@ public class PiedadeMultaQuest : Quest<VehicleModel>
         }
 
         return QuestResult.Ok();
+    }
+
+    public override void Dispose()
+    {
+        _piedadeMultaQuery?.Dispose();
     }
 }
 

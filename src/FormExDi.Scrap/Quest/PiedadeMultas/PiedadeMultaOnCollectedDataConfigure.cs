@@ -7,7 +7,7 @@ namespace FormExDi.Scrap.Quest.PiedadeMultas
     {
         public void OnCollected(IEnumerable<VehicleModel> dataCollected)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
