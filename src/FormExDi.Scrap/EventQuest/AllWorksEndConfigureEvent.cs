@@ -1,6 +1,7 @@
 ﻿using BlScraper.DependencyInjection.ConfigureModel;
 using BlScraper.Model;
 using BlScraper.Results;
+using BlScraper.Results.Models;
 using FormExDi.Scrap.Events;
 using System.ComponentModel;
 
@@ -25,7 +26,7 @@ namespace FormExDi.Scrap.EventQuest
             _allWorksEndControl = allWorksEndControl;
         }
 
-        public void OnFinished(IEnumerable<ResultBase<Exception?>> results)
+        public void OnFinished(IEnumerable<EndEnumerableModel> results)
         {
             OnFinishedEvent(results);
 
@@ -42,12 +43,12 @@ namespace FormExDi.Scrap.EventQuest
         /// <summary>
         /// Current thread of Quest invoke this method
         /// </summary>
-        protected virtual void OnFinishedEvent(IEnumerable<ResultBase<Exception?>> results) { }
+        protected virtual void OnFinishedEvent(IEnumerable<EndEnumerableModel> results) { }
 
 
         /// <summary>
         /// Main thread invoke this method
         /// </summary>
-        protected virtual async Task OnFinishedInvokeAsync(IEnumerable<ResultBase<Exception?>> results) { await Task.CompletedTask; }
+        protected virtual async Task OnFinishedInvokeAsync(IEnumerable<EndEnumerableModel> results) { await Task.CompletedTask; }
     }
 }

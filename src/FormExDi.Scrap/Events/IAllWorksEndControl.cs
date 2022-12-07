@@ -1,4 +1,5 @@
 ﻿using BlScraper.Results;
+using BlScraper.Results.Models;
 
 namespace FormExDi.Scrap.Events
 {
@@ -10,6 +11,6 @@ namespace FormExDi.Scrap.Events
         /// <summary>
         /// OnAllWorksEventAsync
         /// </summary>
-        Task OnAllWorksEndEventAsync(IEnumerable<ResultBase<Exception?>> resultFinished);
+        Task OnAllWorksEndEventAsync(IEnumerable<EndEnumerableModel> resultFinished);
     }
 }
