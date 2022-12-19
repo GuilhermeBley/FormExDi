@@ -2,6 +2,7 @@ using BlScraper.DependencyInjection.Builder;
 using BlScraper.Model;
 using BlScraper.Results;
 using FormExDi.Application.Args;
+using FormExDi.Application.Services.Interface;
 using FormExDi.Presentation.Model;
 using FormExDi.Presentation.Services.Interfaces;
 
@@ -14,10 +15,12 @@ internal partial class RunScrapGUI : Form
     private readonly IScrapBuilder _builder;
     private readonly string _questName;
     private readonly IInfoService _infoService;
+    private readonly IServiceProvider _serviceProvider;
     private IModelScraper? _model;
+    private ILogScrap? _log;
     private SearchsQttStatus _searchsQttStatus = new(0,0);
 
-    public RunScrapGUI(IScrapBuilder scrapBuilder, IInitArgs initArgs, IInfoService infoService)
+    public RunScrapGUI(IServiceProvider serviceProvider, IScrapBuilder scrapBuilder, IInitArgs initArgs, IInfoService infoService)
     {
         if (scrapBuilder is null)
             throw new ArgumentNullException(nameof(scrapBuilder));
@@ -31,7 +34,8 @@ internal partial class RunScrapGUI : Form
         _builder = scrapBuilder;
         _questName = initArgs.QuestName;
         _infoService = infoService;
-
+        _serviceProvider = serviceProvider;
+        
         InitializeComponent();
     }
 
@@ -66,6 +70,8 @@ internal partial class RunScrapGUI : Form
                 {
                     _model = _builder.CreateModelByQuestName(_questName)
                         ?? throw new ArgumentNullException(nameof(_model));
+
+                    _log = (ILogScrap?)_serviceProvider.GetService(typeof(ILogScrapService<>).MakeGenericType(_model.TypeScrap));
                 }
                 catch (Exception e)
                 {
