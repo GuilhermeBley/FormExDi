@@ -1,17 +1,25 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FormExDi.Application.Services.Interface;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FormExDi.Infrastructure.Loger.Extension
 {
     public static class LogDependencyInjection
     {
-        public static IServiceCollection AddLog(this IServiceCollection serviceCollection)
+        /// <summary>
+        /// Add scrap log
+        /// </summary>
+        /// <param name="serviceCollection">service collection</param>
+        /// <param name="assemblies">Quest assemblies</param>
+        public static IServiceCollection AddScrapLog(this IServiceCollection serviceCollection, params System.Reflection.Assembly[] assemblies)
         {
+            foreach (var tuple 
+                in BlScraper.DependencyInjection.ConfigureBuilder.MapQuestFactory.Create(assemblies).GetAvailableQuestsAndData())
+            {
+                var iLogType = typeof(ILogScrapService<>).MakeGenericType(tuple.Quest);
+                var logType = typeof(LogScrapService<,>).MakeGenericType(tuple.Quest, tuple.Data);
+                serviceCollection.AddSingleton(iLogType, logType);                       
+            }
+
             return serviceCollection;
         }
     }

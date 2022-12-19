@@ -7,6 +7,7 @@ using BlScraper.DependencyInjection.Extension.Builder;
 using FormExDi.Presentation.Ui;
 using FormExDi.Presentation.Services.Implementation;
 using FormExDi.Presentation.Services.Interfaces;
+using FormExDi.Infrastructure.Loger.Extension;
 
 namespace FormExDi.Presentation;
 
@@ -48,16 +49,17 @@ static class Program
 
     private static void ConfigureServices(IServiceCollection services)
     {
-        
+        var scrapAssemblies = new System.Reflection.Assembly[] { typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly };
         services
             .AddSingleton<RunScrapGUI>()
             .AddSingleton<Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
             .AddScraperBuilder(
                 (builder) => 
-                builder.AddAssembly(typeof(Scrap.Quest.PiedadeMultas.PiedadeMultaQuest).Assembly))
+                builder.AddAssembly(scrapAssemblies))
             .AddRepositories()
             .AddServices()
             .AddScrap()
+            .AddScrapLog(scrapAssemblies)
             .AddScoped<IInfoService, InfoService>();
     }
 }
