@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FormExDi.Application\FormExDi.Application.csproj" />
+    <ProjectReference Include="..\FormExDi.Scrap\FormExDi.Scrap.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

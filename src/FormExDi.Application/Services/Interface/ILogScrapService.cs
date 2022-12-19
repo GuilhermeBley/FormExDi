@@ -1,4 +1,4 @@
-﻿using FormExDi.Core.Model.Loger;
+﻿using FormExDi.Core.Model.Logger;
 
 namespace FormExDi.Application.Services.Interface;
 

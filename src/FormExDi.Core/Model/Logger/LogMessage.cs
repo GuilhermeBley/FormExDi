@@ -1,4 +1,4 @@
-﻿namespace FormExDi.Core.Model.Loger;
+﻿namespace FormExDi.Core.Model.Logger;
 
 public class LogMessage
 {
