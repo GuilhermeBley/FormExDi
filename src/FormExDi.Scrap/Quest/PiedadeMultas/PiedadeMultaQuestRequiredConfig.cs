@@ -8,12 +8,12 @@ namespace FormExDi.Scrap.Quest.PiedadeMultas;
 public class PiedadeMultaQuestRequiredConfig : RequiredConfigure<PiedadeMultaQuest, VehicleModel>
 {
     public override int initialQuantity => _initArgs.QuantityToRunQuest;
-    public override bool IsRequiredAllWorksEnd => true;
 
     private readonly IVehicleService _vehicleRepository;
     private readonly IInitArgs _initArgs;
 
     public PiedadeMultaQuestRequiredConfig(IVehicleService vehicleService, IInitArgs initArgs)
+        : base(typeof(PiedadeMultaAllWorksEndFilter), typeof(PiedadeDataFinishedConfigureFilterLog))
     {
         _vehicleRepository = vehicleService;
         _initArgs = initArgs;

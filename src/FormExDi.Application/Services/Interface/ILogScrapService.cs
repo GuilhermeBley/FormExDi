@@ -5,6 +5,7 @@ namespace FormExDi.Application.Services.Interface;
 public interface ILogScrapService<TQuest>
     where TQuest : class
 {
+    string Path { get; }
     LogMessage Information(string message, params object[] args);
     LogMessage Warning(string message, params object[] args);
     LogMessage Debug(string message, params object[] args);
