@@ -33,13 +33,9 @@ partial class RunScrapGUI
             this.button1 = new System.Windows.Forms.Button();
             this.LabelTitle = new System.Windows.Forms.Label();
             this.ScrapInfo = new System.Windows.Forms.GroupBox();
-            this.ListScrapInfo = new System.Windows.Forms.ListView();
-            this.Description = new System.Windows.Forms.ColumnHeader();
-            this.Result = new System.Windows.Forms.ColumnHeader();
             this.LabelQtt = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TimerInfo = new System.Windows.Forms.Timer(this.components);
-            this.ScrapInfo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,9 +49,9 @@ partial class RunScrapGUI
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(589, 224);
+            this.button1.Location = new System.Drawing.Point(667, 313);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(199, 111);
+            this.button1.Size = new System.Drawing.Size(132, 65);
             this.button1.TabIndex = 1;
             this.button1.Text = "Pause";
             this.button1.UseVisualStyleBackColor = true;
@@ -72,33 +68,13 @@ partial class RunScrapGUI
             // 
             // ScrapInfo
             // 
-            this.ScrapInfo.Controls.Add(this.ListScrapInfo);
             this.ScrapInfo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ScrapInfo.Location = new System.Drawing.Point(12, 64);
             this.ScrapInfo.Name = "ScrapInfo";
-            this.ScrapInfo.Size = new System.Drawing.Size(556, 271);
+            this.ScrapInfo.Size = new System.Drawing.Size(649, 314);
             this.ScrapInfo.TabIndex = 3;
             this.ScrapInfo.TabStop = false;
             this.ScrapInfo.Text = "Scrap Info";
-            // 
-            // ListScrapInfo
-            // 
-            this.ListScrapInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Description,
-            this.Result});
-            this.ListScrapInfo.Location = new System.Drawing.Point(18, 26);
-            this.ListScrapInfo.Name = "ListScrapInfo";
-            this.ListScrapInfo.Size = new System.Drawing.Size(532, 239);
-            this.ListScrapInfo.TabIndex = 0;
-            this.ListScrapInfo.UseCompatibleStateImageBehavior = false;
-            // 
-            // Description
-            // 
-            this.Description.Text = "Description";
-            // 
-            // Result
-            // 
-            this.Result.Text = "Result";
             // 
             // LabelQtt
             // 
@@ -140,7 +116,6 @@ partial class RunScrapGUI
             this.Name = "RunScrapGUI";
             this.Text = "Search";
             this.Load += new System.EventHandler(this.RunScrapGUI_Load);
-            this.ScrapInfo.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -154,9 +129,6 @@ partial class RunScrapGUI
     private Button button1;
     private Label LabelTitle;
     private GroupBox ScrapInfo;
-    private ListView ListScrapInfo;
-    private ColumnHeader Description;
-    private ColumnHeader Result;
     private Label LabelQtt;
     private Panel panel1;
     private System.Windows.Forms.Timer TimerInfo;
