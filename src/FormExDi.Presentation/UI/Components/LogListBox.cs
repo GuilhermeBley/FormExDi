@@ -18,6 +18,7 @@ namespace FormExDi.Presentation.UI.Components
         public const int DEFAULT_MAX_VIEW = 500;
         private Func<IEnumerable<string>>? _getData { get; set; }
 
+        private int _maxView { get; set; } = DEFAULT_MAX_VIEW;
         private bool _lockOnLast { get; set; } = true;
 
         public bool LockOnLast { get => _lockOnLast; set {
@@ -52,17 +53,17 @@ namespace FormExDi.Presentation.UI.Components
                 _getData = getData;
         }
 
-        public void AddView(int maxView = DEFAULT_MAX_VIEW)
+        private void TimerLog_Tick(object sender, EventArgs eventArgs)
         {
             if (_getData is null)
                 return;
-            if (maxView > MAX_ROW_VIEW || maxView < 1)
-                maxView = MAX_ROW_VIEW;
+            if (_maxView > MAX_ROW_VIEW || _maxView < 1)
+                _maxView = MAX_ROW_VIEW;
 
             var itemsToAdd = _getData().Reverse().TakeWhile(t => !IsLastItem(t)).ToList();
             foreach (var item in itemsToAdd)
             {
-                while (Items.Count >= maxView)
+                while (Items.Count >= _maxView)
                     Items.RemoveAt(0);
 
                 Items.Add(item);

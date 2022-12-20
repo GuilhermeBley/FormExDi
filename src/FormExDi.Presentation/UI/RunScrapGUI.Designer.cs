@@ -30,14 +30,13 @@ partial class RunScrapGUI
     {
             this.components = new System.ComponentModel.Container();
             this.ProgressBarSearchs = new System.Windows.Forms.ProgressBar();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnPause = new System.Windows.Forms.Button();
             this.LabelTitle = new System.Windows.Forms.Label();
             this.ScrapInfo = new System.Windows.Forms.GroupBox();
+            this.LogListBoxScrap = new FormExDi.Presentation.UI.Components.LogListBox();
             this.LabelQtt = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TimerInfo = new System.Windows.Forms.Timer(this.components);
-            this.LogListBoxScrap = new FormExDi.Presentation.UI.Components.LogListBox();
-            this.TimerLog = new System.Windows.Forms.Timer(this.components);
             this.ScrapInfo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -49,15 +48,16 @@ partial class RunScrapGUI
             this.ProgressBarSearchs.Size = new System.Drawing.Size(649, 32);
             this.ProgressBarSearchs.TabIndex = 0;
             // 
-            // button1
+            // BtnPause
             // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(667, 381);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 65);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Pause";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnPause.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnPause.Location = new System.Drawing.Point(667, 381);
+            this.BtnPause.Name = "BtnPause";
+            this.BtnPause.Size = new System.Drawing.Size(132, 65);
+            this.BtnPause.TabIndex = 1;
+            this.BtnPause.Text = "Pause";
+            this.BtnPause.UseVisualStyleBackColor = true;
+            this.BtnPause.Click += new System.EventHandler(this.BtnPause_Click);
             // 
             // LabelTitle
             // 
@@ -79,6 +79,17 @@ partial class RunScrapGUI
             this.ScrapInfo.TabIndex = 3;
             this.ScrapInfo.TabStop = false;
             this.ScrapInfo.Text = "Scrap Info";
+            // 
+            // LogListBoxScrap
+            // 
+            this.LogListBoxScrap.FormattingEnabled = true;
+            this.LogListBoxScrap.HorizontalScrollbar = true;
+            this.LogListBoxScrap.ItemHeight = 22;
+            this.LogListBoxScrap.Location = new System.Drawing.Point(6, 29);
+            this.LogListBoxScrap.LockOnLast = true;
+            this.LogListBoxScrap.Name = "LogListBoxScrap";
+            this.LogListBoxScrap.Size = new System.Drawing.Size(764, 268);
+            this.LogListBoxScrap.TabIndex = 0;
             // 
             // LabelQtt
             // 
@@ -105,21 +116,6 @@ partial class RunScrapGUI
             this.TimerInfo.Interval = 1000;
             this.TimerInfo.Tick += new System.EventHandler(this.TimerInfo_Tick);
             // 
-            // LogListBoxScrap
-            // 
-            this.LogListBoxScrap.FormattingEnabled = true;
-            this.LogListBoxScrap.ItemHeight = 22;
-            this.LogListBoxScrap.Location = new System.Drawing.Point(6, 29);
-            this.LogListBoxScrap.Name = "LogListBoxScrap";
-            this.LogListBoxScrap.Size = new System.Drawing.Size(764, 268);
-            this.LogListBoxScrap.TabIndex = 0;
-            // 
-            // TimerLog
-            // 
-            this.TimerLog.Enabled = true;
-            this.TimerLog.Interval = 1000;
-            this.TimerLog.Tick += new System.EventHandler(this.TimerLog_Tick);
-            // 
             // RunScrapGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -127,7 +123,7 @@ partial class RunScrapGUI
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LabelQtt);
             this.Controls.Add(this.ScrapInfo);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnPause);
             this.Controls.Add(this.ProgressBarSearchs);
             this.Controls.Add(this.panel1);
             this.MaximumSize = new System.Drawing.Size(818, 497);
@@ -146,12 +142,11 @@ partial class RunScrapGUI
     #endregion
 
     private ProgressBar ProgressBarSearchs;
-    private Button button1;
+    private Button BtnPause;
     private Label LabelTitle;
     private GroupBox ScrapInfo;
     private Label LabelQtt;
     private Panel panel1;
     private System.Windows.Forms.Timer TimerInfo;
     private UI.Components.LogListBox LogListBoxScrap;
-    private System.Windows.Forms.Timer TimerLog;
 }

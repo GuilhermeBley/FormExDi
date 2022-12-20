@@ -172,8 +172,31 @@ internal partial class RunScrapGUI : Form
         }
     }
 
-    private void TimerLog_Tick(object sender, EventArgs e)
+    private async void BtnPause_Click(object sender, EventArgs e)
     {
-        LogListBoxScrap.AddView();
+        var btn = sender as Button 
+            ?? throw new ArgumentNullException("Button");
+
+        try
+        {
+            btn.Enabled = false;
+
+            if (_model is null)
+                return;
+
+            if (btn.Text.Equals("Pause"))
+            {
+                btn.Text = "Unpause";
+                await _model.PauseAsync(true);
+                return;
+            }
+
+            btn.Text = "Pause";
+            await _model.PauseAsync(false);
+        }
+        finally
+        {
+            btn.Enabled = true;
+        }
     }
 }
