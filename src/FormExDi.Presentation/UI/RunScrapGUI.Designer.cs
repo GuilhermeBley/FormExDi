@@ -36,6 +36,9 @@ partial class RunScrapGUI
             this.LabelQtt = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TimerInfo = new System.Windows.Forms.Timer(this.components);
+            this.LogListBoxScrap = new FormExDi.Presentation.UI.Components.LogListBox();
+            this.TimerLog = new System.Windows.Forms.Timer(this.components);
+            this.ScrapInfo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,13 +46,13 @@ partial class RunScrapGUI
             // 
             this.ProgressBarSearchs.Location = new System.Drawing.Point(12, 406);
             this.ProgressBarSearchs.Name = "ProgressBarSearchs";
-            this.ProgressBarSearchs.Size = new System.Drawing.Size(776, 32);
+            this.ProgressBarSearchs.Size = new System.Drawing.Size(649, 32);
             this.ProgressBarSearchs.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(667, 313);
+            this.button1.Location = new System.Drawing.Point(667, 381);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(132, 65);
             this.button1.TabIndex = 1;
@@ -68,10 +71,11 @@ partial class RunScrapGUI
             // 
             // ScrapInfo
             // 
+            this.ScrapInfo.Controls.Add(this.LogListBoxScrap);
             this.ScrapInfo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ScrapInfo.Location = new System.Drawing.Point(12, 64);
             this.ScrapInfo.Name = "ScrapInfo";
-            this.ScrapInfo.Size = new System.Drawing.Size(649, 314);
+            this.ScrapInfo.Size = new System.Drawing.Size(776, 314);
             this.ScrapInfo.TabIndex = 3;
             this.ScrapInfo.TabStop = false;
             this.ScrapInfo.Text = "Scrap Info";
@@ -101,6 +105,21 @@ partial class RunScrapGUI
             this.TimerInfo.Interval = 1000;
             this.TimerInfo.Tick += new System.EventHandler(this.TimerInfo_Tick);
             // 
+            // LogListBoxScrap
+            // 
+            this.LogListBoxScrap.FormattingEnabled = true;
+            this.LogListBoxScrap.ItemHeight = 22;
+            this.LogListBoxScrap.Location = new System.Drawing.Point(6, 29);
+            this.LogListBoxScrap.Name = "LogListBoxScrap";
+            this.LogListBoxScrap.Size = new System.Drawing.Size(764, 268);
+            this.LogListBoxScrap.TabIndex = 0;
+            // 
+            // TimerLog
+            // 
+            this.TimerLog.Enabled = true;
+            this.TimerLog.Interval = 1000;
+            this.TimerLog.Tick += new System.EventHandler(this.TimerLog_Tick);
+            // 
             // RunScrapGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -116,6 +135,7 @@ partial class RunScrapGUI
             this.Name = "RunScrapGUI";
             this.Text = "Search";
             this.Load += new System.EventHandler(this.RunScrapGUI_Load);
+            this.ScrapInfo.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -132,4 +152,6 @@ partial class RunScrapGUI
     private Label LabelQtt;
     private Panel panel1;
     private System.Windows.Forms.Timer TimerInfo;
+    private UI.Components.LogListBox LogListBoxScrap;
+    private System.Windows.Forms.Timer TimerLog;
 }

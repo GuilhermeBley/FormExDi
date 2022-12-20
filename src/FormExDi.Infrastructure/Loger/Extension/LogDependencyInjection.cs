@@ -22,7 +22,9 @@ namespace FormExDi.Infrastructure.Loger.Extension
                 var opt = new LogConfig(tuple.Quest.Name);
                 var logConfig = new LoggerConfiguration().WriteTo.File(
                         opt.FileName, encoding: opt.Encoding, 
-                        outputTemplate: "[{Level:u3}] {Message:lj}{NewLine}{Exception}"
+                        outputTemplate: "[{Level:u3}] {Message:lj}{NewLine}{Exception}",
+                        shared: true
+                        
                     ).MinimumLevel.Information();
                 
                 var log = logConfig.CreateLogger();

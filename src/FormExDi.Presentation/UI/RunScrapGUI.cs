@@ -51,6 +51,7 @@ internal partial class RunScrapGUI : Form
     private async void RunScrapGUI_Load(object sender, EventArgs e)
     {
         LabelTitle.Text = $"Search {_questName}";
+        LogListBoxScrap.SetGetData(GetLog);
 
         await WaitHandleCreate(_cts.Token);
         Update();
@@ -156,5 +157,23 @@ internal partial class RunScrapGUI : Form
             TimerInfo.Enabled = false;
             Dispose();
         }
+    }
+
+    private IEnumerable<string> GetLog()
+    {
+        using (var stream = File.Open(_log!.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        using (var reader = new StreamReader(stream))
+        {
+            string? line = string.Empty;
+            while ((line = reader.ReadLine()) != null)
+            {
+                yield return line;
+            }
+        }
+    }
+
+    private void TimerLog_Tick(object sender, EventArgs e)
+    {
+        LogListBoxScrap.AddView();
     }
 }
