@@ -13,7 +13,7 @@ public static class DiScrapExtension
                     OptionDefaultStreamEncoding = System.Text.Encoding.UTF8,
                     OptionEmptyCollection = true
                 })
-            .AddScoped<HttpClient>((ServiceProvider) => {
+            .AddScoped((ServiceProvider) => {
                 HttpClientHandler handler = new()
                 {
                     AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate
@@ -29,6 +29,26 @@ public static class DiScrapExtension
                     .Accept
                     .TryParseAdd("*/*");
                 return client;
+            })
+            .AddScoped<OpenQA.Selenium.IWebDriver>((serviceProvider) =>
+            {
+                var initArg = serviceProvider.GetRequiredService<Application.Args.IInitArgs>();
+                var config = new OpenQA.Selenium.Chrome.ChromeOptions();
+                config.AddUserProfilePreference("profile.default_content_setting_values.automatic_downloads", 1);
+                config.AddArgument("--start-maximized");
+                config.AddArgument("--ignore-certificate-errors");
+                config.AddArgument("--silent");
+                config.AddArgument("--disable-gpu");
+                config.AddArgument("--log-level=3");
+                config.AddArgument("--no-sandbox");
+                config.AddArgument("--disable-application-cache");
+                config.AddArgument("--disable-dev-shm-usage");
+                config.AddArgument("disable-infobars");
+                config.AddArgument("--disable-extensions");
+                config.AddArgument("--window-size=1280,720");
+                if (initArg.ContainsArgs("headless"))
+                    config.AddArgument("--headless");
+                return new OpenQA.Selenium.Chrome.ChromeDriver(config);
             });
     }
 
