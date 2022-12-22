@@ -59,6 +59,7 @@ static class Program
             .AddRepositories()
             .AddServices()
             .AddScrap()
+            .AddQueries()
             .AddScrapLog(scrapAssemblies)
             .AddScoped<IInfoService, InfoService>();
     }

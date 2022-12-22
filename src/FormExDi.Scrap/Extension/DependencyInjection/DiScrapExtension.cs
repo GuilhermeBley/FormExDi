@@ -6,7 +6,6 @@ public static class DiScrapExtension
 {
     public static IServiceCollection AddScrap(this IServiceCollection services)
     {
-        AddScrapInternal(services);
         return services
             .AddScoped<HtmlAgilityPack.HtmlDocument>(
                 (ServiceProvider) => new HtmlAgilityPack.HtmlDocument(){
@@ -50,11 +49,5 @@ public static class DiScrapExtension
                     config.AddArgument("--headless");
                 return new OpenQA.Selenium.Chrome.ChromeDriver(config);
             });
-    }
-
-    private static IServiceCollection AddScrapInternal(IServiceCollection services)
-    {
-        return services
-            .AddScoped(typeof(Quest.PiedadeMultas.IPiedadeMultaQuery), typeof(Quest.PiedadeMultas.PiedadeMultaQuery));
     }
 }
