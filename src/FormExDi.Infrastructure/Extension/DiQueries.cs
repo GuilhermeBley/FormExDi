@@ -10,7 +10,8 @@ public static class DiQueries
     {
         return serviceCollection
             .AddClients()
-            .AddScoped(typeof(FormExDi.Scrap.Quest.PiedadeMultas.IPiedadeMultaQuery), typeof(Queries.PiedadeMultas.PiedadeMultaQuery));
+            .AddScoped(typeof(FormExDi.Scrap.Quest.PiedadeMultas.IPiedadeMultaQuery), typeof(Queries.PiedadeMultas.PiedadeMultaQuery))
+            .AddScoped(typeof(FormExDi.Scrap.Quest.PiedadeMultasSelenium.IPiedadeMultaSeleniumQuery), typeof(Queries.PiedadeMultas.PiedadeMultaSeleniumQuery));
     }
 
     private static IServiceCollection AddClients(this IServiceCollection serviceCollection)

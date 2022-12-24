@@ -34,6 +34,8 @@ static class Program
                 ConfigureServices(services);
                 services.Configure<Infrastructure.Options.ConnectionOptions>(
                     context.Configuration.GetSection(Infrastructure.Options.ConnectionOptions.Section));
+                services.Configure<Infrastructure.Options.SeleniumOptions>(
+                    context.Configuration.GetSection(Infrastructure.Options.SeleniumOptions.Section));
             })
             .ConfigureLogging(logging =>
             {
