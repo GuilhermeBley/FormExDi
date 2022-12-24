@@ -1,5 +1,4 @@
 using FormExDi.Infrastructure.Extension;
-using FormExDi.Scrap.Extension.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -58,7 +57,6 @@ static class Program
                 builder.AddAssembly(scrapAssemblies))
             .AddRepositories()
             .AddServices()
-            .AddScrap()
             .AddQueries()
             .AddScrapLog(scrapAssemblies)
             .AddScoped<IInfoService, InfoService>();
