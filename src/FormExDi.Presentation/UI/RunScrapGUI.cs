@@ -3,6 +3,7 @@ using BlScraper.Model;
 using BlScraper.Results;
 using FormExDi.Application.Args;
 using FormExDi.Application.Services.Interface;
+using FormExDi.Presentation.ConsoleForm;
 using FormExDi.Presentation.Model;
 using FormExDi.Presentation.Services.Interfaces;
 
@@ -50,6 +51,9 @@ internal partial class RunScrapGUI : Form
 
     private async void RunScrapGUI_Load(object sender, EventArgs e)
     {
+        ConsoleUtils.CreateConsole();
+        ConsoleUtils.Hide();
+
         LabelTitle.Text = $"Search {_questName}";
         LogListBoxScrap.SetGetData(GetLog);
 
@@ -176,7 +180,7 @@ internal partial class RunScrapGUI : Form
     {
         var btn = sender as Button 
             ?? throw new ArgumentNullException("Button");
-
+        
         try
         {
             btn.Enabled = false;

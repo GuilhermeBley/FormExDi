@@ -17,6 +17,8 @@ public class PiedadeMultaSeleniumQuest : Quest<VehicleModel>
 
     public override QuestResult Execute(VehicleModel data, CancellationToken cancellationToken = default)
     {
+        cancellationToken.WaitHandle.WaitOne(1000 * 30);
+
         foreach (var multa in _piedadeMultaQuery.GetInfracoesAsync(
             data.Plate, data.Renavam, cancellationToken).GetAwaiter().GetResult())
         {

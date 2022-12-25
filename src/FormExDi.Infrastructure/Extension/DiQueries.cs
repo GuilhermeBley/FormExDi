@@ -41,9 +41,12 @@ public static class DiQueries
                 return client;
             })
             .AddScoped<OpenQA.Selenium.IWebDriver>((serviceProvider) =>
-            {   
+            {
+                Console.Write('\n');
                 var initArg = serviceProvider.GetRequiredService<Application.Args.IInitArgs>();
-                var chromeDriverService = serviceProvider.GetRequiredService<OpenQA.Selenium.Chrome.ChromeDriverService>();
+                //var chromeDriverService = serviceProvider.GetRequiredService<OpenQA.Selenium.Chrome.ChromeDriverService>();
+                var chromeDriverService = OpenQA.Selenium.Chrome.ChromeDriverService.CreateDefaultService();
+                
                 var options = serviceProvider.GetRequiredService<IOptions<SeleniumOptions>>();
                 var config = new OpenQA.Selenium.Chrome.ChromeOptions();
                 config.AddUserProfilePreference("profile.default_content_setting_values.automatic_downloads", 1);
@@ -66,6 +69,7 @@ public static class DiQueries
             {
                 var chromeDriverService = OpenQA.Selenium.Chrome.ChromeDriverService.CreateDefaultService();
                 chromeDriverService.HideCommandPromptWindow = false;
+                
                 return chromeDriverService;
             });
     }
