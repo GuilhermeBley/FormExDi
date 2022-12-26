@@ -9,15 +9,24 @@ namespace FormExDi.Presentation.ConsoleForm
 {
     internal static class ConsoleUtils
     {
+        private const int ATTACH_PARENT_PROCESS = -1;
         private static IntPtr? _handleConsole { get; set; } = null;
 
         private const UInt32 StdOutputHandle = 0xFFFFFFF5;
+
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetStdHandle(UInt32 nStdHandle);
+
+        [DllImport("kernel32.dll")]
+        static extern bool AttachConsole(int dwProcessId);
+
         [DllImport("kernel32.dll")]
         private static extern void SetStdHandle(UInt32 nStdHandle, IntPtr handle);
-        [DllImport("kernel32", SetLastError = false)]
+
+        [DllImport("kernel32", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool AllocConsole();
+
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetConsoleWindow();
 

@@ -36,14 +36,19 @@ internal partial class RunScrapGUI : Form
         _questName = initArgs.QuestName;
         _infoService = infoService;
         _serviceProvider = serviceProvider;
-        
+
+        ConsoleUtils.CreateConsole();
+        //ConsoleUtils.Hide();
+        System.Windows.Forms.Application.ThreadExit += (sender, args) =>
+        {
+            ConsoleUtils.DisposeCurrentConsole();
+        };
+
         InitializeComponent();
     }
 
     protected async override void OnClosed(EventArgs e)
     {
-        ConsoleUtils.DisposeCurrentConsole();
-
         _cts.Cancel();
         _cts.Dispose();
 
@@ -53,9 +58,6 @@ internal partial class RunScrapGUI : Form
 
     private async void RunScrapGUI_Load(object sender, EventArgs e)
     {
-        ConsoleUtils.CreateConsole();
-        ConsoleUtils.Hide();
-
         LabelTitle.Text = $"Search {_questName}";
         LogListBoxScrap.SetGetData(GetLog);
 
