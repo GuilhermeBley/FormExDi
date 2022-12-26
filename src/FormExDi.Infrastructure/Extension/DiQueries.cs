@@ -1,3 +1,4 @@
+using FormExDi.Infrastructure.Extension.Selenium;
 using FormExDi.Infrastructure.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -63,7 +64,7 @@ public static class DiQueries
                 config.AddArgument("--window-size=1280,720");
                 if (initArg.ContainsArgs("headless"))
                     config.AddArgument("--headless");
-                return new OpenQA.Selenium.Chrome.ChromeDriver(chromeDriverService, config);
+                return new InternalDriver(chromeDriverService, config);
             })
             .AddSingleton((serviceProvider) =>
             {

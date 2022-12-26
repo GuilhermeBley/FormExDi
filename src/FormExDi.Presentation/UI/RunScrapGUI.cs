@@ -42,6 +42,8 @@ internal partial class RunScrapGUI : Form
 
     protected async override void OnClosed(EventArgs e)
     {
+        ConsoleUtils.DisposeCurrentConsole();
+
         _cts.Cancel();
         _cts.Dispose();
 

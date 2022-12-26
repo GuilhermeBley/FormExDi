@@ -66,5 +66,14 @@ namespace FormExDi.Presentation.ConsoleForm
             else
                 ShowWindow(_handleConsole.Value, SW_SHOW);
         }
+
+        public static void DisposeCurrentConsole()
+        {
+            lock (_lock)
+            {
+                FreeConsole();
+                _handleConsole = null;
+            }
+        }
     }
 }
