@@ -21,7 +21,7 @@ static class Program
         System.Windows.Forms.Application.SetHighDpiMode(HighDpiMode.SystemAware);
         System.Windows.Forms.Application.EnableVisualStyles();
         System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-
+        
         var host = Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration((context, builder) =>
             {
