@@ -9,15 +9,27 @@ internal class LogScrapService<TQuest, TData> : ILogScrapService<TQuest>
     where TQuest : Quest<TData>
     where TData : class
 {
-    private readonly Logger _log;
+    private readonly object _lock = new object();
+    private readonly Func<Logger> _logFactory;
+    private Logger? __log = null;
+    private Logger _log { get 
+        { 
+            if (__log is null) 
+                lock (_lock)
+                {
+                    if (__log is null)
+                        __log = _logFactory.Invoke();
+                }
+            return __log ?? throw new ArgumentNullException("log");
+        }}
     private readonly string _path;
 
     public string Path => _path;
 
-    public LogScrapService(string path, Logger log)
+    public LogScrapService(string path, Func<Logger> logFactory)
     {
         _path = path;
-        _log = log;
+        _logFactory = logFactory;
     }
 
     public LogMessage Debug(string message, params object[] args)

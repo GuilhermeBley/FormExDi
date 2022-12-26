@@ -167,7 +167,13 @@ internal partial class RunScrapGUI : Form
 
     private IEnumerable<string> GetLog()
     {
-        using (var stream = File.Open(_log!.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        if (_log is null)
+            yield break;
+
+        if (!File.Exists(_log.Path))
+            yield break;
+
+        using (var stream = File.Open(_log.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         using (var reader = new StreamReader(stream))
         {
             string? line = string.Empty;
