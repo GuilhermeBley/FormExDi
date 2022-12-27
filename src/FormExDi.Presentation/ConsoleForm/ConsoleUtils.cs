@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -48,19 +49,17 @@ namespace FormExDi.Presentation.ConsoleForm
                 if (_handleConsole is not null)
                     return;
 
+                var tryGetHandle = GetConsoleWindow();
+                if (tryGetHandle != IntPtr.Zero)
+                {
+                    _handleConsole = tryGetHandle;
+                    return;
+                }
+
                 AllocConsole();
 
-                IntPtr defaultStdout = new IntPtr(7);
-                IntPtr currentStdout = GetStdHandle(StdOutputHandle);
+                Console.Title = string.Empty;
 
-                if (currentStdout != defaultStdout)
-                    // reset stdout
-                    SetStdHandle(StdOutputHandle, defaultStdout);
-
-                // reopen stdout
-                TextWriter writer = new StreamWriter(Console.OpenStandardOutput())
-                { AutoFlush = true };
-                Console.SetOut(writer);
                 _handleConsole = GetConsoleWindow();
             }
         }

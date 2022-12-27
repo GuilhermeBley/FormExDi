@@ -38,11 +38,7 @@ internal partial class RunScrapGUI : Form
         _serviceProvider = serviceProvider;
 
         ConsoleUtils.CreateConsole();
-        //ConsoleUtils.Hide();
-        System.Windows.Forms.Application.ThreadExit += (sender, args) =>
-        {
-            ConsoleUtils.DisposeCurrentConsole();
-        };
+        ConsoleUtils.Hide();
 
         InitializeComponent();
     }
