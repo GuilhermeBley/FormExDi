@@ -29,6 +29,7 @@ partial class RunScrapGUI
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RunScrapGUI));
             this.ProgressBarSearchs = new System.Windows.Forms.ProgressBar();
             this.BtnPause = new System.Windows.Forms.Button();
             this.LabelTitle = new System.Windows.Forms.Label();
@@ -37,8 +38,14 @@ partial class RunScrapGUI
             this.LabelQtt = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TimerInfo = new System.Windows.Forms.Timer(this.components);
+            this.NotifyIconForm = new System.Windows.Forms.NotifyIcon(this.components);
+            this.ContextMenuStripNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripExit = new System.Windows.Forms.ToolStripMenuItem();
             this.ScrapInfo.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.ContextMenuStripNotify.SuspendLayout();
             this.SuspendLayout();
             // 
             // ProgressBarSearchs
@@ -116,6 +123,43 @@ partial class RunScrapGUI
             this.TimerInfo.Interval = 1000;
             this.TimerInfo.Tick += new System.EventHandler(this.TimerInfo_Tick);
             // 
+            // NotifyIconForm
+            // 
+            this.NotifyIconForm.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.NotifyIconForm.ContextMenuStrip = this.ContextMenuStripNotify;
+            this.NotifyIconForm.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIconForm.Icon")));
+            this.NotifyIconForm.Visible = true;
+            // 
+            // ContextMenuStripNotify
+            // 
+            this.ContextMenuStripNotify.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ContextMenuStripNotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripOpen,
+            this.toolStripSeparator1,
+            this.ToolStripExit});
+            this.ContextMenuStripNotify.Name = "ContextMenuStripNotify";
+            this.ContextMenuStripNotify.Size = new System.Drawing.Size(115, 58);
+            this.ContextMenuStripNotify.DoubleClick += new System.EventHandler(this.ContextMenuStripNotify_DoubleClick);
+            // 
+            // ToolStripOpen
+            // 
+            this.ToolStripOpen.Name = "ToolStripOpen";
+            this.ToolStripOpen.Size = new System.Drawing.Size(114, 24);
+            this.ToolStripOpen.Text = "Open";
+            this.ToolStripOpen.Click += new System.EventHandler(this.ToolStripOpen_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(111, 6);
+            // 
+            // ToolStripExit
+            // 
+            this.ToolStripExit.Name = "ToolStripExit";
+            this.ToolStripExit.Size = new System.Drawing.Size(114, 24);
+            this.ToolStripExit.Text = "Exit";
+            this.ToolStripExit.Click += new System.EventHandler(this.ToolStripExit_Click);
+            // 
             // RunScrapGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -126,17 +170,30 @@ partial class RunScrapGUI
             this.Controls.Add(this.BtnPause);
             this.Controls.Add(this.ProgressBarSearchs);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(818, 497);
             this.MinimumSize = new System.Drawing.Size(818, 497);
             this.Name = "RunScrapGUI";
             this.Text = "Search";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RunScrapGUI_FormClosing);
             this.Load += new System.EventHandler(this.RunScrapGUI_Load);
             this.ScrapInfo.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.ContextMenuStripNotify.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
+    }
+
+    #endregion
+
+    #region My Form Designer
+
+    private void InitializeMyComponent()
+    {
+        this.Icon = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        this.NotifyIconForm.Icon = this.Icon;
     }
 
     #endregion
@@ -149,4 +206,9 @@ partial class RunScrapGUI
     private Panel panel1;
     private System.Windows.Forms.Timer TimerInfo;
     private UI.Components.LogListBox LogListBoxScrap;
+    private NotifyIcon NotifyIconForm;
+    private ContextMenuStrip ContextMenuStripNotify;
+    private ToolStripMenuItem ToolStripOpen;
+    private ToolStripSeparator toolStripSeparator1;
+    private ToolStripMenuItem ToolStripExit;
 }

@@ -31,7 +31,7 @@ internal partial class RunScrapGUI : Form
 
         if (string.IsNullOrEmpty(initArgs.QuestName))
             throw new ArgumentNullException(nameof(initArgs.QuestName));
-
+        
         _builder = scrapBuilder;
         _questName = initArgs.QuestName;
         _infoService = infoService;
@@ -41,6 +41,7 @@ internal partial class RunScrapGUI : Form
         ConsoleUtils.Hide();
 
         InitializeComponent();
+        InitializeMyComponent();
     }
 
     protected async override void OnClosed(EventArgs e)
@@ -91,6 +92,7 @@ internal partial class RunScrapGUI : Form
             return false;
 
         LabelTitle.Text = $"Search {_questName}.";
+        NotifyIconForm.Text = LabelTitle.Text;
 
         var result = await _model.Run();
 
@@ -208,5 +210,56 @@ internal partial class RunScrapGUI : Form
         {
             btn.Enabled = true;
         }
+    }
+
+    private void ToolStripOpen_Click(object sender, EventArgs e)
+    {
+        HideForm(false);
+    }
+
+    private void HideForm(bool hide = true)
+    {
+        if ((hide && !ShowInTaskbar) || (!hide && ShowInTaskbar))
+            return;
+
+        if (hide)
+        {
+            Opacity = 0;
+            ShowInTaskbar = false;
+            return;
+        }
+
+        Opacity = 100;
+        ShowInTaskbar = true;
+    }
+
+    private bool IsHide()
+    {
+        return Opacity == 0;
+    }
+
+    private void RunScrapGUI_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (IsHide())
+            return;
+
+        if (_model is null)
+            return;
+
+        if (_model.State == ModelStateEnum.Disposed)
+            return;
+
+        e.Cancel = true;
+        HideForm();
+    }
+
+    private void ToolStripExit_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
+
+    private void ContextMenuStripNotify_DoubleClick(object sender, EventArgs e)
+    {
+        HideForm(false);
     }
 }

@@ -7,6 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>69e7af00-e2f3-41e5-844e-b5ffd06c564f</UserSecretsId>
+    <ApplicationIcon>web-scrap.ico</ApplicationIcon>
+    <PackageIcon>pngaaa.com-5401503.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
