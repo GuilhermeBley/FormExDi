@@ -2,7 +2,7 @@
   "profiles": {
     "FormExDi.Presentation": {
       "commandName": "Project",
-      "commandLineArgs": "PiedadeMultaSeleniumQuest 2"
+      "commandLineArgs": "PiedadeMultaSeleniumQuest 2 headless"
     }
   }
 }

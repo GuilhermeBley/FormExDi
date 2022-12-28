@@ -40,8 +40,9 @@ partial class RunScrapGUI
             this.TimerInfo = new System.Windows.Forms.Timer(this.components);
             this.NotifyIconForm = new System.Windows.Forms.NotifyIcon(this.components);
             this.ContextMenuStripNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ToolStripOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripTitle = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripExit = new System.Windows.Forms.ToolStripMenuItem();
             this.ScrapInfo.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -134,29 +135,37 @@ partial class RunScrapGUI
             // 
             this.ContextMenuStripNotify.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ContextMenuStripNotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripOpen,
+            this.ToolStripTitle,
             this.toolStripSeparator1,
+            this.ToolStripOpen,
             this.ToolStripExit});
             this.ContextMenuStripNotify.Name = "ContextMenuStripNotify";
-            this.ContextMenuStripNotify.Size = new System.Drawing.Size(115, 58);
+            this.ContextMenuStripNotify.Size = new System.Drawing.Size(261, 115);
             this.ContextMenuStripNotify.DoubleClick += new System.EventHandler(this.ContextMenuStripNotify_DoubleClick);
             // 
-            // ToolStripOpen
+            // ToolStripTitle
             // 
-            this.ToolStripOpen.Name = "ToolStripOpen";
-            this.ToolStripOpen.Size = new System.Drawing.Size(114, 24);
-            this.ToolStripOpen.Text = "Open";
-            this.ToolStripOpen.Click += new System.EventHandler(this.ToolStripOpen_Click);
+            this.ToolStripTitle.Name = "ToolStripTitle";
+            this.ToolStripTitle.ReadOnly = true;
+            this.ToolStripTitle.Size = new System.Drawing.Size(200, 27);
+            this.ToolStripTitle.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(111, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(257, 6);
+            // 
+            // ToolStripOpen
+            // 
+            this.ToolStripOpen.Name = "ToolStripOpen";
+            this.ToolStripOpen.Size = new System.Drawing.Size(260, 24);
+            this.ToolStripOpen.Text = "Open";
+            this.ToolStripOpen.Click += new System.EventHandler(this.ToolStripOpen_Click);
             // 
             // ToolStripExit
             // 
             this.ToolStripExit.Name = "ToolStripExit";
-            this.ToolStripExit.Size = new System.Drawing.Size(114, 24);
+            this.ToolStripExit.Size = new System.Drawing.Size(260, 24);
             this.ToolStripExit.Text = "Exit";
             this.ToolStripExit.Click += new System.EventHandler(this.ToolStripExit_Click);
             // 
@@ -181,6 +190,7 @@ partial class RunScrapGUI
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ContextMenuStripNotify.ResumeLayout(false);
+            this.ContextMenuStripNotify.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,4 +221,5 @@ partial class RunScrapGUI
     private ToolStripMenuItem ToolStripOpen;
     private ToolStripSeparator toolStripSeparator1;
     private ToolStripMenuItem ToolStripExit;
+    private ToolStripTextBox ToolStripTitle;
 }

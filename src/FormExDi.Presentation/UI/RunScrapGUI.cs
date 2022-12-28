@@ -6,6 +6,7 @@ using FormExDi.Application.Services.Interface;
 using FormExDi.Presentation.ConsoleForm;
 using FormExDi.Presentation.Model;
 using FormExDi.Presentation.Services.Interfaces;
+using System.ComponentModel;
 
 namespace FormExDi.Presentation.Ui;
 
@@ -42,15 +43,6 @@ internal partial class RunScrapGUI : Form
 
         InitializeComponent();
         InitializeMyComponent();
-    }
-
-    protected async override void OnClosed(EventArgs e)
-    {
-        _cts.Cancel();
-        _cts.Dispose();
-
-        if (_model is not null)
-            await TryDisposeModel();
     }
 
     private async void RunScrapGUI_Load(object sender, EventArgs e)
@@ -91,8 +83,7 @@ internal partial class RunScrapGUI : Form
         if (cancellationToken.IsCancellationRequested)
             return false;
 
-        LabelTitle.Text = $"Search {_questName}.";
-        NotifyIconForm.Text = LabelTitle.Text;
+        NotifyIconForm.Text = ToolStripTitle.Text = LabelTitle.Text = $"Search {_questName}";
 
         var result = await _model.Run();
 
@@ -219,7 +210,7 @@ internal partial class RunScrapGUI : Form
 
     private void HideForm(bool hide = true)
     {
-        if ((hide && !ShowInTaskbar) || (!hide && ShowInTaskbar))
+        if ((hide && IsHide()) || (!hide && !IsHide()))
             return;
 
         if (hide)
@@ -240,6 +231,11 @@ internal partial class RunScrapGUI : Form
 
     private void RunScrapGUI_FormClosing(object sender, FormClosingEventArgs e)
     {
+        e.Cancel = false;
+
+        if (!ToolStripExit.Enabled)
+            return;
+
         if (IsHide())
             return;
 
@@ -255,11 +251,26 @@ internal partial class RunScrapGUI : Form
 
     private void ToolStripExit_Click(object sender, EventArgs e)
     {
+        ToolStripExit.Enabled = false;
         Close();
     }
 
     private void ContextMenuStripNotify_DoubleClick(object sender, EventArgs e)
     {
         HideForm(false);
+    }
+
+    protected async override void OnFormClosing(FormClosingEventArgs e)
+    {
+        base.OnFormClosing(e);
+
+        if (e.Cancel)
+            return;
+
+        _cts.Cancel();
+        _cts.Dispose();
+
+        if (_model is not null)
+            await TryDisposeModel();
     }
 }
