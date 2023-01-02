@@ -1,15 +1,15 @@
 ﻿using BlScraper.DependencyInjection.ConfigureModel.Filter;
 using BlScraper.Results.Models;
-using FormExDi.Application.Model;
 using FormExDi.Application.Services.Interface;
 
-namespace FormExDi.Scrap.Quest.PiedadeMultasSelenium;
-public class PiedadeMultaAllWorksEndFilter : IAllWorksEndConfigureFilter<PiedadeMultaSeleniumQuest, VehicleModel>
+namespace FormExDi.Scrap.Filters;
+
+public class AllWorksEndLogFilter : IAllWorksEndConfigureFilter
 {
 
-    private readonly ILogScrapService<PiedadeMultaSeleniumQuest> _log;
+    private readonly ILogScrapService _log;
 
-    public PiedadeMultaAllWorksEndFilter(ILogScrapService<PiedadeMultaSeleniumQuest> log)
+    public AllWorksEndLogFilter(ILogScrapService log)
     {
         _log = log;
     }

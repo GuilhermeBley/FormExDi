@@ -2,6 +2,7 @@
 using FormExDi.Application.Args;
 using FormExDi.Application.Services.Interface;
 using BlScraper.DependencyInjection.ConfigureModel;
+using FormExDi.Scrap.Filters;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas;
 
@@ -13,7 +14,7 @@ public class PiedadeMultaQuestRequiredConfig : RequiredConfigure<PiedadeMultaQue
     private readonly IInitArgs _initArgs;
 
     public PiedadeMultaQuestRequiredConfig(IVehicleService vehicleService, IInitArgs initArgs)
-        : base(typeof(PiedadeMultaAllWorksEndFilter), typeof(PiedadeDataFinishedConfigureFilterLog))
+        : base(typeof(DataFinishedLogFilter), typeof(DataCollectedLogFilter), typeof(AllWorksEndLogFilter))
     {
         _vehicleRepository = vehicleService;
         _initArgs = initArgs;
