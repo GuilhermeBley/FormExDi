@@ -1,6 +1,6 @@
 using HtmlAgilityPack;
 
-namespace FormExDi.Scrap.Extension.Html;
+namespace FormExDi.Infrastructure.Extension.Html;
 
 internal static class HtmlAgilityPackExtension
 {

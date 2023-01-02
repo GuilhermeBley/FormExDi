@@ -1,6 +1,4 @@
 using FormExDi.Application.Model;
-using System.Web;
-using HtmlAgilityPack;
 
 namespace FormExDi.Scrap.Quest.PiedadeMultas;
 
