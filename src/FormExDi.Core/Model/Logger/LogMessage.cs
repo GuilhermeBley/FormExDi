@@ -2,13 +2,15 @@
 
 public class LogMessage
 {
+    public static readonly LogMessage None = new LogMessage(0, string.Empty, string.Empty, DateTime.MinValue);
+
     public int IdScrap { get; private set; }
     public string ScrapName { get; private set; } = string.Empty;
     public string Message { get; private set; } = string.Empty;
     public DateTime DtLog { get; private set; }
     public object[] Args { get; private set; }
 
-    private LogMessage(int idScrap, string scrapName, string message, DateTime dtLog, object[] args)
+    private LogMessage(int idScrap, string scrapName, string message, DateTime dtLog, params object[] args)
     {
         IdScrap = idScrap;
         Message = message;

@@ -19,7 +19,7 @@ internal partial class RunScrapGUI : Form
     private readonly IInfoService _infoService;
     private readonly IServiceProvider _serviceProvider;
     private IModelScraper? _model;
-    private ILogScrap? _log;
+    private ILogScrapService? _log;
     private SearchsQttStatus _searchsQttStatus = new(0,0);
 
     public RunScrapGUI(IServiceProvider serviceProvider, IScrapBuilder scrapBuilder, IInitArgs initArgs, IInfoService infoService)
@@ -69,7 +69,7 @@ internal partial class RunScrapGUI : Form
                     _model = _builder.CreateModelByQuestName(_questName)
                         ?? throw new ArgumentNullException(nameof(_model));
 
-                    _log = (ILogScrap?)_serviceProvider.GetService(typeof(ILogScrapService<>).MakeGenericType(_model.TypeScrap));
+                    _log = (ILogScrapService?)_serviceProvider.GetService(typeof(ILogScrapService<>).MakeGenericType(_model.TypeScrap));
                 }
                 catch (Exception e)
                 {
