@@ -16,6 +16,7 @@ namespace FormExDi.Infrastructure.Loger.Extension
         /// <param name="assemblies">Quest assemblies</param>
         public static IServiceCollection AddScrapLog(this IServiceCollection serviceCollection, params System.Reflection.Assembly[] assemblies)
         {
+            serviceCollection.AddScoped<ILogScrapService, LogCurrentScrapService>();
             foreach (var tuple 
                 in BlScraper.DependencyInjection.ConfigureBuilder.MapQuestFactory.Create(assemblies).GetAvailableQuestsAndData())
             {
