@@ -32,7 +32,7 @@
 
             this.TimerLog = new System.Windows.Forms.Timer(this.components);
 
-            HorizontalScrollbar = true;
+            HorizontalScrollbar = false;
             ScrollAlwaysVisible = false;
 
             // 
@@ -41,6 +41,14 @@
             this.TimerLog.Enabled = true;
             this.TimerLog.Interval = 1000;
             this.TimerLog.Tick += new System.EventHandler(this.TimerLog_Tick);
+        }
+
+        #endregion
+
+        #region My Designer
+
+        private void MyInitializeComponent()
+        {
         }
 
         #endregion

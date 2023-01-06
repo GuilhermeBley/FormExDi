@@ -4,6 +4,7 @@ using BlScraper.Results;
 using FormExDi.Application.Args;
 using FormExDi.Application.Services.Interface;
 using FormExDi.Presentation.ConsoleForm;
+using FormExDi.Presentation.Delegates;
 using FormExDi.Presentation.Model;
 using FormExDi.Presentation.Services.Interfaces;
 using System.ComponentModel;
@@ -12,6 +13,8 @@ namespace FormExDi.Presentation.Ui;
 
 internal partial class RunScrapGUI : Form
 {
+    protected event OnPauseEventHandler? OnPause;
+
     private readonly CancellationTokenSource _cts = new();
     private readonly object _lock = new();
     private readonly IScrapBuilder _builder;
@@ -191,11 +194,13 @@ internal partial class RunScrapGUI : Form
             if (btn.Text.Equals("Pause"))
             {
                 btn.Text = "Unpause";
+                OnPause?.Invoke(this, new OnPauseEventArgs(true));
                 await _model.PauseAsync(true);
                 return;
             }
 
             btn.Text = "Pause";
+            OnPause?.Invoke(this, new OnPauseEventArgs(false));
             await _model.PauseAsync(false);
         }
         finally
@@ -261,7 +266,7 @@ internal partial class RunScrapGUI : Form
         HideForm(false);
     }
 
-    protected async override void OnFormClosing(FormClosingEventArgs e)
+    protected async sealed override void OnFormClosing(FormClosingEventArgs e)
     {
         base.OnFormClosing(e);
 

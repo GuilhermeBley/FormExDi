@@ -17,9 +17,22 @@ namespace FormExDi.Presentation.UI.Components
         public const int MAX_CHARACTERS_PER_ROW = 2000;
         public const int DEFAULT_MAX_VIEW = 500;
         private Func<IEnumerable<string>>? _getData { get; set; }
-
+        private readonly bool _lockSize = false;
+        private bool _makeQuery = true;
         private int _maxView { get; set; } = DEFAULT_MAX_VIEW;
         private bool _lockOnLast { get; set; } = true;
+
+        public bool MakeQuery { get => _makeQuery;
+            set
+            {
+                if (value == _makeQuery)
+                    return;
+                _makeQuery = value;
+                TimerLog.Enabled = value;
+                if (!value)
+                    Items.Clear();
+            }
+        }
 
         public bool LockOnLast { get => _lockOnLast; set {
 
@@ -40,11 +53,13 @@ namespace FormExDi.Presentation.UI.Components
         public LogListBox()
         {
             InitializeComponent();
+            MyInitializeComponent();
         }
 
-        protected override void OnPaint(PaintEventArgs pe)
+        public LogListBox(bool lockSize)
+            : this()
         {
-            base.OnPaint(pe);
+            _lockSize = lockSize;
         }
 
         public void SetGetData(Func<IEnumerable<string>> getData)

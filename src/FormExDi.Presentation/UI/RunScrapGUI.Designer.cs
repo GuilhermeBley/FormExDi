@@ -140,7 +140,7 @@ partial class RunScrapGUI
             this.ToolStripOpen,
             this.ToolStripExit});
             this.ContextMenuStripNotify.Name = "ContextMenuStripNotify";
-            this.ContextMenuStripNotify.Size = new System.Drawing.Size(261, 115);
+            this.ContextMenuStripNotify.Size = new System.Drawing.Size(261, 87);
             this.ContextMenuStripNotify.DoubleClick += new System.EventHandler(this.ContextMenuStripNotify_DoubleClick);
             // 
             // ToolStripTitle
