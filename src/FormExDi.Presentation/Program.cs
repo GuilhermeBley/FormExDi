@@ -56,7 +56,10 @@ static class Program
             .AddSingleton<Application.Args.IInitArgs>(new Args.InitArgs(Environment.GetCommandLineArgs()))
             .AddScraperBuilder(
                 (builder) => 
-                builder.AddAssembly(scrapAssemblies))
+                builder.AddAssembly(scrapAssemblies)
+                .AddAllWorksEndConfigureFilter<Scrap.Filters.AllWorksEndLogFilter>()
+                .AddDataCollectedConfigureFilter<Scrap.Filters.DataCollectedLogFilter>()
+                .AddDataFinishedConfigureFilter<Scrap.Filters.DataFinishedLogFilter>())
             .AddRepositories()
             .AddServices()
             .AddQueries()

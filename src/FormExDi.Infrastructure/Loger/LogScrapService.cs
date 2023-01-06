@@ -12,7 +12,7 @@ internal class LogCurrentScrapService : ILogScrapService
     private readonly ILogScrapService? _holderLog;
     public string Path => _holderLog?.Path ?? string.Empty;
 
-    public LogCurrentScrapService(IServiceProvider serviceProvider, IScrapContextAcessor scrapContextAcessor, IMapQuest mapQuest)
+    public LogCurrentScrapService(IServiceProvider serviceProvider, IScrapContextAccessor scrapContextAcessor, IMapQuest mapQuest)
     {
         var context = scrapContextAcessor.ScrapContext;
 

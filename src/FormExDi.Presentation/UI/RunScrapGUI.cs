@@ -66,8 +66,9 @@ internal partial class RunScrapGUI : Form
             {
                 try
                 {
-                    _model = _builder.CreateModelByQuestName(_questName)
-                        ?? throw new ArgumentNullException(nameof(_model));
+                    using (ExecutionContext.SuppressFlow())
+                        _model = _builder.CreateModelByQuestName(_questName)
+                            ?? throw new ArgumentNullException(nameof(_model));
 
                     _log = (ILogScrapService?)_serviceProvider.GetService(typeof(ILogScrapService<>).MakeGenericType(_model.TypeScrap));
                 }
