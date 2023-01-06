@@ -24,7 +24,7 @@ internal class LogCurrentScrapService : ILogScrapService
         if (tuple.Quest is null)
             return;
 
-        _holderLog = (ILogScrapService?)serviceProvider.GetService(typeof(LogScrapService<,>).MakeGenericType(tuple.Quest, tuple.Data));
+        _holderLog = (ILogScrapService?)serviceProvider.GetService(typeof(ILogScrapService<>).MakeGenericType(tuple.Quest));
     }
 
     public LogMessage Debug(string message, params object[] args)
